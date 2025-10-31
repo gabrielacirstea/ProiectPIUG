@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <title>SugarBloom — Contact</title>
+
+    <!-- 🟢 Theme Toggle + Help Button + Scroll Button Styles -->
+    <style>
+        .nav-action {
+            all: unset;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 1001;
+            background: var(--color-pink-200, #ffe6f0);
+            box-shadow: var(--color-shadow, 0 8px 18px rgba(255, 110, 174, .25));
+            color: var(--color-rose-700, #a2476a);
+            border-radius: 999px;
+            margin-left: 10px;
+            transition: background .25s ease, box-shadow .25s ease, transform .15s ease;
+        }
+        .help-button { width: 42px; height: 42px; padding: 0; }
+        .nav-action:hover { transform: translateY(-1px); }
+        .nav-action svg { width: 22px; height: 22px; color: inherit; }
+
+        /* Theme toggle */
+        .theme-toggle{
+            all: unset;
+            display: grid; 
+            place-items: center;
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1001;
+            background: var(--color-pink-200, #ffe6f0); 
+            box-shadow: var(--color-shadow, 0 8px 18px rgba(255,110,174,.25));
+            transition: background .25s ease, box-shadow .25s ease, transform .15s ease;
+            margin-left: 10px;
+        }
+        .theme-toggle:hover { transform: translateY(-1px); }
+        .theme-toggle svg { width: 22px; height: 22px; color: var(--color-rose-700, #a2476a); }
+
+        /* Icon Toggling Logic */
+        html[data-theme='light'] #iconMoon { display: none; }
+        html[data-theme='light'] #iconSun { display: block; }
+        html[data-theme='dark'] #iconMoon { display: block; }
+        html[data-theme='dark'] #iconSun { display: none; }
+
+        /* 🟢 Scroll Up/Down Button */
+        #scrollButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 999;
+            background: var(--color-pink-600, #ff6fae);
+            color: var(--color-white, #ffffff);
+            border: none;
+            box-shadow: 0 4px 15px rgba(255, 110, 174, 0.4);
+            transition: opacity 0.3s, transform 0.3s, background 0.3s;
+            opacity: 0;
+            visibility: hidden;
+        }
+        #scrollButton.visible { opacity: 1; visibility: visible; }
+        #scrollButton:hover { transform: scale(1.05); background: var(--color-pink-500, #ff9ecb); }
+        #scrollButton svg { width: 24px; height: 24px; }
+
+        /* Respect reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            #scrollButton { transition: none; }
+            html { scroll-behavior: auto; }
+        }
+
+         /* 🟢 NEW: Notification Styling */
+        .notification {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-pink-600, #ff6fae);
+            color: var(--color-white, #ffffff);
+            padding: 12px 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            z-index: 1200;
+        }
+        .notification.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 🟢 NEW: Notification Element -->
+    <div id="successNotification" class="notification" aria-live="assertive" aria-atomic="true">
+        Message sent successfully!
+    </div>
+    <header class="site-nav">
+        <div class="nav-inner">
+            <a href="index.html" class="brand">
+                <img src="img/logo-removebg.png" alt="SugarBloom logo" width="110" style="height:auto;">
+            </a>
+
+            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3" y="6" width="18" height="2" rx="1" fill="currentColor" />
+                    <rect x="3" y="11" width="18" height="2" rx="1" fill="currentColor" />
+                    <rect x="3" y="16" width="18" height="2" rx="1" fill="currentColor" />
+                </svg>
+            </button>
+
+            <nav class="nav-links" id="navLinks">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about-us.html">ABOUT US</a></li>
+                    <li><a href="products.html">PRODUCTS</a></li>
+                    <li><a href="events.html">EVENTS &amp; CATERING</a></li>
+                    <li><a href="workshops.html">WORKSHOPS</a></li>
+                    <li><a href="contact.html" class="active">CONTACT</a></li>
+                </ul>
+            </nav>
+            <a href="contact.html" class="nav-action help-button" aria-label="Go to Contact for Help">Help</a>
+
+            <!-- Theme Toggle Button -->
+            <button id="themeToggle" class="theme-toggle" aria-label="Toggle light/dark theme">
+                <!-- Sun Icon (Light Mode) -->
+                <svg id="iconSun" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor"
+                        d="M12 4a1 1 0 0 1 1-1h0a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V4zm0 16a1 1 0 0 1 1 1h0a1 1 0 0 1-1 1 1 1 0 0 1-1-1v-1a1 1 0 1 1 2 0v1zM4 13a1 1 0 1 1 0-2H5a1 1 0 1 1 0 2H4zm15 0a1 1 0 1 1 0-2h1a1 1 0 1 1 0 2h-1zM5.6 6.0a1 1 0 0 1 1.4-1.4l.7.7A1 1 0 1 1 6.3 6.7l-.7-.7zm11.3 11.3a1 1 0 0 1 1.4 1.4l-.7.7a1 1 0 0 1-1.4-1.4l.7-.7zM6.3 17.3a1 1 0 0 1-1.4 1.4l-.7-.7a1 1 0 1 1 1.4-1.4l.7.7zm12.1-11.7a1 1 0 0 1 1.4 1.4l-.7.7a1 1 0 1 1-1.4-1.4l.7-.7zM12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8z" />
+                </svg>
+                <!-- Moon Icon (Dark Mode) -->
+                <svg id="iconMoon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor"
+                        d="M10.85 3.3a.75.75 0 0 0-.71.55c-.24 1.25-.36 2.5-.32 3.75s.18 2.5.49 3.74c.3 1.25.75 2.45 1.34 3.61.6 1.15 1.33 2.22 2.19 3.19a.75.75 0 0 0 1.26-.6c.22-1.25.33-2.5.28-3.75-.06-1.25-.26-2.5-.58-3.74-.31-1.25-.76-2.45-1.34-3.61-.6-1.15-1.33-2.22-2.18-3.19a.75.75 0 0 0-.55-.37zM12 2a10 10 0 1 0 10 10c0-5.52-4.48-10-10-10z" />
+                </svg>
+            </button>
+        </div>
+    </header>
+    <section class="sub-header">
+        <h1>How to contact us</h1>
+    </section>
+    <section class="location">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2784.1830249788663!2d21.226228099999997!3d45.74747660000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47455d831ccc8ff7%3A0x255d397f5edeea71!2sFaculty%20of%20Automation%20%26%20Computer%20Science!5e0!3m2!1sen!2sro!4v1715529218559!5m2!1sen!2sro"
+            width="600" height="450" style="border:0;" allowfullscreen loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+    </section>
+    <section class="contacteaza">
+        <div class="column">
+            <div class="info">
+                <i class="fa-solid fa-house"></i>
+                <div>
+                    <h5>Facultatea de Automatică și Calculatoare, Bd. Vasile
+                        Pârvan</h5>
+                    <p>Timișoara, Timiș, RO</p>
+                </div>
+            </div>
+            <div class="info">
+                <i class="fa-solid fa-phone"></i>
+                <div>
+                    <h5>+40 729918915</h5>
+                    <p>Monday - Friday, between 8:00 AM - 6:00 PM</p>
+                </div>
+            </div>
+            <div class="info">
+                <i class="fa-solid fa-envelope"></i>
+                <div>
+                    <h5>alexandra.cirstea@student.upt.ro</h5>
+                    <p>You can contact us on email anytime!</p>
+                </div>
+            </div>
+            <div class="info">
+                <i class="fa-solid fa-share-nodes"></i>
+                <div>
+                    <h5>Follow us on social media!</h5>
+                    <div class="social-buttons" aria-label="Social buttons (no links)">
+                        <button class="social-btn ig" type="button" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </button>
+                        <button class="social-btn fb" type="button" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </button>
+                        <button class="social-btn tt" type="button" aria-label="TikTok">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </button>
+                        <button class="social-btn yt" type="button" aria-label="YouTube">
+                            <i class="fa-brands fa-youtube"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="column">
+
+            <form action="form-handler.php" method="post" onsubmit="return validateForm()">
+                <input type="text" id="name" name="name" placeholder="Your name" required>
+                <input type="email" id="email" name="email" placeholder="Your email address" required>
+                <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                <textarea rows="10" id="mesaj" name="mesaj" placeholder="Message" required></textarea>
+                <button type="submit" class="button">Submit your
+                    request</button>
+
+            </form>
+        </div>
+    </section>
+    <footer class="footer">
+        <h4>© 2025 SugarBloom. All rights reserved.</h4>
+    </footer>
+    
+    <!-- 🟢 MODIFIED: Form Validation + Hamburger Menu -->
+    <script>
+        // Form Validation (console error instead of alert)
+        function validateForm() {
+            var nameInput = document.getElementById('name');
+            var emailInput = document.getElementById('email');
+            var subjectInput = document.getElementById('subject');
+            var messageInput = document.getElementById('mesaj');
+
+            var name = nameInput.value.trim();
+            var namePattern = /^[A-Za-z\s]{3,}$/;
+            if (name === '' || !namePattern.test(name)) {
+                console.error('Validation Error: Please enter a valid name (at least 3 letters).');
+                return false;
+            }
+
+            var email = emailInput.value.trim();
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                console.error('Validation Error: Please enter a valid email address.');
+                return false;
+            }
+
+            var subject = subjectInput.value.trim();
+            if (subject === '') {
+                console.error('Validation Error: Please enter a subject.');
+                return false;
+            }
+
+            var message = messageInput.value.trim();
+            if (message === '') {
+                console.error('Validation Error: Please enter a message.');
+                return false;
+            }
+
+            return true;
+        }
+        
+        // Hamburger drawer logic
+        const btn = document.querySelector('.menu-toggle');
+        const drawer = document.getElementById('navLinks');
+        if (btn && drawer) {
+            btn.addEventListener('click', () => {
+                document.body.classList.toggle('nav-open');
+                btn.setAttribute('aria-expanded', document.body.classList.contains('nav-open'));
+            });
+            drawer.addEventListener('click', e => {
+                if (e.target.tagName === 'A') {
+                    document.body.classList.remove('nav-open');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+    </script>
+
+    <!-- 🟢 Theme Toggling Logic -->
+    <script>
+        
+        // Helper function to update the ARIA label and icon visibility
+        function updateThemeUI(theme) {
+            const toggle = document.getElementById('themeToggle');
+            if (toggle) {
+                const targetTheme = theme === 'light' ? 'dark' : 'light';
+                toggle.setAttribute('aria-label', `Toggle to ${targetTheme} theme`);
+            }
+        }
+
+        // 1) Initialization: Set theme from localStorage or system preference
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = localStorage.getItem('sb-theme');
+        let initialTheme;
+        
+        if (savedTheme) {
+            initialTheme = savedTheme;
+        } else {
+            initialTheme = prefersDark ? 'dark' : 'light';
+        }
+        
+        document.documentElement.dataset.theme = initialTheme;
+        updateThemeUI(initialTheme);
+
+        // 2) Toggle + persist
+        const toggle = document.getElementById('themeToggle');
+        if (toggle) {
+            toggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.dataset.theme;
+                const next = (currentTheme === 'dark') ? 'light' : 'dark';
+                document.documentElement.dataset.theme = next;
+                localStorage.setItem('sb-theme', next);
+                updateThemeUI(next);
+            });
+        }
+
+        // 3) Listen to system preference changes if no manual preference is saved
+        if (!savedTheme && window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                document.documentElement.dataset.theme = e.matches ? 'dark' : 'light';
+                updateThemeUI(e.matches ? 'dark' : 'light');
+            });
+        }
+    </script>
+
+    <!-- 🟢 Fixed Scroll Button -->
+    <button id="scrollButton" aria-label="Scroll to Top">
+        <svg id="scrollIcon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <!-- Arrow path; rotated via JS -->
+            <path d="M12 4l-8 8h6v8h4v-8h6z" transform="rotate(180 12 12)"/>
+        </svg>
+    </button>
+
+    <!-- 🟢 Scroll Up/Down Button Logic -->
+    <script>
+        (function () {
+            const scrollButton = document.getElementById('scrollButton');
+            if (!scrollButton) return;
+
+            const iconPath = scrollButton.querySelector('path');
+            const topThreshold = 50; // when to show the button
+            let isAtBottom = false;
+
+            function checkScrollPosition() {
+                const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+                const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                const contentHeight = document.documentElement.scrollHeight;
+
+                // Show/hide button
+                const showButton = scrollY > topThreshold;
+                scrollButton.classList.toggle('visible', showButton);
+
+                // Are we near the bottom?
+                isAtBottom = (scrollY + viewportHeight) >= (contentHeight - topThreshold);
+
+                // Toggle icon direction + aria-label
+                if (isAtBottom) {
+                    // Show "up" arrow
+                    iconPath.setAttribute('transform', 'rotate(0 12 12)');
+                    scrollButton.setAttribute('aria-label', 'Scroll to Top');
+                } else {
+                    // Show "down" arrow
+                    iconPath.setAttribute('transform', 'rotate(180 12 12)');
+                    scrollButton.setAttribute('aria-label', 'Scroll to Bottom');
+                }
+            }
+
+            function handleScrollButtonClick() {
+                if (isAtBottom) {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                }
+            }
+
+            window.addEventListener('scroll', checkScrollPosition, { passive: true });
+            scrollButton.addEventListener('click', handleScrollButtonClick);
+
+            // Initialize on load
+            window.addEventListener('load', checkScrollPosition);
+        })();
+    </script>
+
+</body>
+
+</html>

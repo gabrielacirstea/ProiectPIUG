@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SugarBloom — Events & Catering</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- 🟢 NEW: Theme Toggle and Scroll Button Styles -->
+    <style>
+        .nav-action {
+            all: unset;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 1001;
+            background: var(--color-pink-200, #ffe6f0);
+            box-shadow: var(--color-shadow, 0 8px 18px rgba(255, 110, 174, .25));
+            color: var(--color-rose-700, #a2476a);
+            border-radius: 999px;
+            margin-left: 10px;
+            transition: background .25s ease, box-shadow .25s ease, transform .15s ease;
+        }
+
+        .help-button {
+            width: 42px;
+            height: 42px;
+            padding: 0;
+        }
+
+        .nav-action:hover {
+            transform: translateY(-1px);
+        }
+
+        .nav-action svg {
+            width: 22px;
+            height: 22px;
+            color: inherit;
+        }
+
+
+        /* This CSS ensures the correct icon is shown based on the theme */
+        .theme-toggle {
+            all: unset;
+            display: grid;
+            place-items: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1001;
+            /* Styling assumes theme variables from style.css */
+            background: var(--color-pink-200, #ffe6f0);
+            box-shadow: var(--color-shadow, 0 8px 18px rgba(255, 110, 174, .25));
+            transition: background .25s ease, box-shadow .25s ease, transform .15s ease;
+            margin-left: 10px;
+            /* Separator from menu-toggle */
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-1px);
+        }
+
+        .theme-toggle svg {
+            width: 22px;
+            height: 22px;
+            /* Icon color assumes theme variables from style.css */
+            color: var(--color-rose-700, #a2476a);
+        }
+
+        /* Icon Toggling Logic */
+        html[data-theme='light'] #iconMoon {
+            display: none;
+        }
+
+        html[data-theme='light'] #iconSun {
+            display: block;
+        }
+
+        html[data-theme='dark'] #iconMoon {
+            display: block;
+        }
+
+        html[data-theme='dark'] #iconSun {
+            display: none;
+        }
+
+        /* 🟢 NEW: Scroll Button Styles */
+        #scrollButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 999;
+            background: var(--color-pink-600, #ff6fae);
+            color: var(--color-white, #ffffff);
+            border: none;
+            box-shadow: 0 4px 15px rgba(255, 110, 174, 0.4);
+            transition: opacity 0.3s, transform 0.3s, background 0.3s;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #scrollButton.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #scrollButton:hover {
+            transform: scale(1.05);
+            background: var(--color-pink-500, #ff9ecb);
+        }
+
+        #scrollButton svg {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <<header class="site-nav">
+        <div class="nav-inner">
+
+            <a href="index.html" class="brand">
+                <img src="img/logo-removebg.png" alt="SugarBloom logo" width="110" height="auto">
+            </a>
+
+            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3" y="6" width="18" height="2" rx="1" fill="currentColor" />
+                    <rect x="3" y="11" width="18" height="2" rx="1" fill="currentColor" />
+                    <rect x="3" y="16" width="18" height="2" rx="1" fill="currentColor" />
+                </svg>
+            </button>
+
+            <nav class="nav-links" id="navLinks">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about-us.html">ABOUT US</a></li>
+                    <li><a href="products.html">PRODUCTS</a></li>
+                    <li><a href="events.html" class="active">EVENTS &amp; CATERING</a></li>
+                    <li><a href="workshops.html">WORKSHOPS</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </nav>
+            <a href="contact.html" class="nav-action help-button" aria-label="Go to Contact for Help">Help</a>
+
+
+            <!-- 🟢 UPDATED: Theme Toggle Button with both SVGs -->
+            <button id="themeToggle" class="nav-action theme-toggle" aria-label="Toggle light/dark theme">
+                <!-- Sun Icon (Light Mode) -->
+                <svg id="iconSun" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor"
+                        d="M12 4a1 1 0 0 1 1-1h0a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V4zm0 16a1 1 0 0 1 1 1h0a1 1 0 0 1-1 1 1 1 0 0 1-1-1v-1a1 1 0 1 1 2 0v1zM4 13a1 1 0 1 1 0-2H5a1 1 0 1 1 0 2H4zm15 0a1 1 0 1 1 0-2h1a1 1 0 1 1 0 2h-1zM5.6 6.0a1 1 0 0 1 1.4-1.4l.7.7A1 1 0 1 1 6.3 6.7l-.7-.7zm11.3 11.3a1 1 0 0 1 1.4 1.4l-.7.7a1 1 0 0 1-1.4-1.4l.7-.7zM6.3 17.3a1 1 0 0 1-1.4 1.4l-.7-.7a1 1 0 1 1 1.4-1.4l.7.7zm12.1-11.7a1 1 0 0 1 1.4 1.4l-.7.7a1 1 0 1 1-1.4-1.4l.7-.7zM12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8z" />
+                </svg>
+                <!-- Moon Icon (Dark Mode) -->
+                <svg id="iconMoon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor"
+                        d="M10.85 3.3a.75.75 0 0 0-.71.55c-.24 1.25-.36 2.5-.32 3.75s.18 2.5.49 3.74c.3 1.25.75 2.45 1.34 3.61.6 1.15 1.33 2.22 2.19 3.19a.75.75 0 0 0 1.26-.6c.22-1.25.33-2.5.28-3.75-.06-1.25-.26-2.5-.58-3.74-.31-1.25-.76-2.45-1.34-3.61-.6-1.15-1.33-2.22-2.18-3.19a.75.75 0 0 0-.55-.37zM12 2a10 10 0 1 0 10 10c0-5.52-4.48-10-10-10z" />
+                </svg>
+            </button>
+        </div>
+    </header>
+    <section class="sub-header">
+        <h1>Events & Catering</h1>
+    </section>
+    <section class="search-wrap" aria-label="Search">
+        <div class="search-box">
+            <label for="search" class="search-label">Search</label>
+            <input id="search" type="search" placeholder="Search" autocomplete="off">
+            <!-- dropdown cu rezultate -->
+            <ul id="search-results" class="search-results" hidden></ul>
+        </div>
+    </section>
+
+    <!-- sursa de căutat: poți folosi lista existentă sau generată din pagină -->
+    <ul id="items" hidden>
+        <li class="item" data-url="events.html#birthday" data-keywords="birthday sweet table">Birthday Sweet Table</li>
+        <li class="item" data-url="events.html#wedding" data-keywords="wedding candy bar">Wedding Candy Bar</li>
+        <li class="item" data-url="events.html#office" data-keywords="office treat box">Office Treat Box</li>
+
+        <li class="item" data-url="products.html#weddingcake" data-keywords="wedding cake">Wedding Cake</li>
+        <li class="item" data-url="products.html#occasioncake" data-keywords="occasion cake">Occasion Cake</li>
+        <li class="item" data-url="products.html#sweetreats" data-keywords="sweet treats">Sweet Treats</li>
+
+        <li class="item" data-url="workshops.html#cupcake" data-keywords="cupcake vanilie glazura">Cupcake Decorating 101
+        </li>
+        <li class="item" data-url="workshops.html#flowers" data-keywords="flori buttercream">Buttercream Flowers</li>
+        <li class="item" data-url="workshops.html#cookie" data-keywords="cookie art royal icing">Whimsical Cookie Art</li>
+    </ul>
+
+    <section class="events container">
+        <p class="intro">
+            Whether you're planning a wedding, a birthday party, or a cozy
+            gathering, SugarBloom brings sweetness and magic to your special day.
+            From whimsical candy bars to elegant dessert tables, we've got something
+            delightful for every occasion. 💕
+        </p>
+
+        <div class="offers">
+            <!-- Offer 1 -->
+            <div class="offer-card">
+                <h2>🎉 Birthday Sweet Table</h2>
+                <p class="price">from €180</p>
+                <ul>
+                    <li>🧁 24 mini cupcakes (assorted flavors)</li>
+                    <li>🍪 30 themed cookies</li>
+                    <li>🍫 Chocolate-dipped pretzels</li>
+                    <li>🎂 1 personalized 6” cake</li>
+                </ul>
+                <a href="contact.html" class="button">Book Now</a>
+            </div>
+
+            <!-- Offer 2 -->
+            <div class="offer-card">
+                <h2>💍 Wedding Candy Bar</h2>
+                <p class="price">from €450</p>
+                <ul>
+                    <li>🍩 Tower of 60 assorted cupcakes</li>
+                    <li>🍓 Seasonal fruit tarts</li>
+                    <li>🥂 Macaron display (50 pcs)</li>
+                    <li>🎂 2-tier wedding cake (design included)</li>
+                    <li>✨ Setup & decoration at your venue</li>
+                </ul>
+                <a href="contact.html" class="button">Book Now</a>
+            </div>
+
+            <!-- Offer 3 -->
+            <div class="offer-card">
+                <h2>🍪 Office Treat Box</h2>
+                <p class="price">from €95</p>
+                <ul>
+                    <li>☕ 36 assorted mini pastries</li>
+                    <li>🍩 Donut platter (12 pcs)</li>
+                    <li>🍫 Brownie bites (20 pcs)</li>
+                    <li>🥤 Free delivery in Timisoara</li>
+                </ul>
+                <a href="contact.html" class="button">Book Now</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <h4>© 2025 SugarBloom. All rights reserved.</h4>
+    </footer>
+    
+    <!-- 🟢 NEW: Fixed Scroll Button (Always at the bottom of the body) -->
+    <button id="scrollButton" aria-label="Scroll to Top">
+        <svg id="scrollIcon" viewBox="0 0 24 24" fill="currentColor">
+            <!-- Default Up Arrow -->
+            <path d="M12 4l-8 8h6v8h4v-8h6z" transform="rotate(180 12 12)"/>
+        </svg>
+    </button>
+
+    <script>
+        // Helper function to update the ARIA label and icon visibility
+        function updateThemeUI(theme) {
+            const toggle = document.getElementById('themeToggle');
+            if (toggle) {
+                const targetTheme = theme === 'light' ? 'dark' : 'light';
+                toggle.setAttribute('aria-label', `Toggle to ${targetTheme} theme`);
+            }
+        }
+
+        // 🟢 NEW: Scroll Up/Down Button Logic
+        const scrollButton = document.getElementById('scrollButton');
+        const scrollIconPath = scrollButton.querySelector('path');
+        const topThreshold = 50;
+        let isAtBottom = false;
+
+        function checkScrollPosition() {
+            const scrollY = window.scrollY;
+            const viewportHeight = window.innerHeight;
+            const contentHeight = document.documentElement.scrollHeight;
+
+            // Show button only if scrolled down past threshold
+            const showButton = scrollY > topThreshold;
+            scrollButton.classList.toggle('visible', showButton);
+
+            // Determine if the user is near the bottom
+            isAtBottom = (scrollY + viewportHeight) >= (contentHeight - topThreshold);
+
+            // Toggle icon and aria-label
+            if (isAtBottom) {
+                // Change icon to UP arrow (0 degree rotation)
+                scrollIconPath.setAttribute('transform', 'rotate(0 12 12)');
+                scrollButton.setAttribute('aria-label', 'Scroll to Top');
+            } else {
+                // Change icon to DOWN arrow (180 degree rotation)
+                scrollIconPath.setAttribute('transform', 'rotate(180 12 12)');
+                scrollButton.setAttribute('aria-label', 'Scroll to Bottom');
+            }
+        }
+
+        function handleScrollButtonClick() {
+            if (isAtBottom) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+        }
+
+        // Attach scroll event listeners
+        window.addEventListener('scroll', checkScrollPosition);
+        scrollButton.addEventListener('click', handleScrollButtonClick);
+        window.addEventListener('load', checkScrollPosition);
+        // ------------------------------------------------------------------
+
+        const btn = document.querySelector('.menu-toggle');
+        const drawer = document.getElementById('navLinks');
+        if (btn && drawer) {
+            btn.addEventListener('click', () => {
+                document.body.classList.toggle('nav-open');
+                btn.setAttribute('aria-expanded', document.body.classList.contains('nav-open'));
+            });
+            drawer.addEventListener('click', e => {
+                if (e.target.tagName === 'A') {
+                    document.body.classList.remove('nav-open');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+    </script>
+
+    <script>
+        // Preia “baza de date” din #items
+        const DB = [...document.querySelectorAll('#items .item')].map(li => ({
+            title: li.textContent.trim(),
+            url: li.dataset.url || '#',
+            hay: (li.textContent + ' ' + (li.dataset.keywords || '')).toLowerCase()
+        }));
+
+        const input = document.getElementById('search');
+        const list = document.getElementById('search-results');
+
+        // Debounce simplu
+        let t;
+        function debounce(fn, ms = 200) { clearTimeout(t); t = setTimeout(fn, ms); }
+
+        if (input && list) {
+            input.addEventListener('input', () => debounce(handleSearch, 200));
+            input.addEventListener('focus', () => { if (input.value.trim().length >= 2) list.hidden = false; });
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.search-box')) list.hidden = true;
+            });
+        }
+
+        function handleSearch() {
+            const q = input.value.trim().toLowerCase();
+            if (q.length < 2) { list.hidden = true; list.innerHTML = ''; return; }
+
+            // filtrează
+            const results = DB.filter(x => x.hay.includes(q)).slice(0, 10);
+
+            // randează dropdown
+            list.innerHTML = results.length
+                ? results.map(x => `<li><a href="${x.url}">${highlight(x.title, q)}</a></li>`).join('')
+                : `<li><a href="javascript:void(0)" tabindex="-1" style="pointer-events:none;color:#8a6273">No results</a></li>`;
+
+            list.hidden = false;
+        }
+
+        function highlight(text, term) {
+            const re = new RegExp(`(${term.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')})`, 'ig');
+            return text.replace(re, '<mark style="background:#ff9ecb52;border-radius:4px;">$1</mark>');
+        }
+    </script>
+
+    <!-- 🟢 NEW: Theme Toggling Logic -->
+    <script>
+        // This is a duplicate of the updateThemeUI function above, ensuring it runs.
+        // It's separated for clarity but could be merged.
+        function updateThemeUI(theme) {
+            const toggle = document.getElementById('themeToggle');
+            if (toggle) {
+                const targetTheme = theme === 'light' ? 'dark' : 'light';
+                toggle.setAttribute('aria-label', `Toggle to ${targetTheme} theme`);
+            }
+        }
+        
+        // 1) Initialization: Set theme from localStorage or system preference
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = localStorage.getItem('sb-theme');
+        let initialTheme;
+
+        if (savedTheme) {
+            initialTheme = savedTheme;
+        } else {
+            initialTheme = prefersDark ? 'dark' : 'light';
+        }
+
+        document.documentElement.dataset.theme = initialTheme;
+        updateThemeUI(initialTheme);
+
+        // 2) Toggle + persist
+        const toggle = document.getElementById('themeToggle');
+        if (toggle) {
+            toggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.dataset.theme;
+                const next = (currentTheme === 'dark') ? 'light' : 'dark';
+                document.documentElement.dataset.theme = next;
+                localStorage.setItem('sb-theme', next);
+                updateThemeUI(next);
+            });
+        }
+
+        // 3) Listen to system preference changes if no manual preference is saved
+        if (!savedTheme && window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                document.documentElement.dataset.theme = e.matches ? 'dark' : 'light';
+                updateThemeUI(e.matches ? 'dark' : 'light');
+            });
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SugarBloom — About Us</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2LC9HPKZ08"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date()); gtag('config', 'G-2LC9HPKZ08');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+    <!-- 🟢 UPDATED: Theme Toggle and Carousel Styles -->
+    <style>
+        /* 🟢 NEW: Common Nav Action Styles (for both Help and Toggle buttons) */
+        .nav-action {
+            all: unset;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 1001;
+
+            /* Styling based on theme variables (assuming colors are defined in style.css) */
+            background: var(--color-pink-200, #ffe6f0);
+            box-shadow: var(--color-shadow, 0 8px 18px rgba(255, 110, 174, .25));
+            color: var(--color-rose-700, #a2476a);
+            border-radius: 999px;
+            margin-left: 10px;
+            transition: background .25s ease, box-shadow .25s ease, transform .15s ease;
+        }
+
+        .nav-action:hover {
+            transform: translateY(-1px);
+        }
+
+        /* Specific styling for the circular buttons */
+        .theme-toggle,
+        .help-button {
+            width: 42px;
+            height: 42px;
+            padding: 0;
+        }
+
+        .theme-toggle svg,
+        .help-button svg {
+            width: 22px;
+            height: 22px;
+            color: inherit;
+        }
+
+        /* Icon Toggling Logic */
+        html[data-theme='light'] #iconMoon {
+            display: none;
+        }
+
+        html[data-theme='light'] #iconSun {
+            display: block;
+        }
+
+        html[data-theme='dark'] #iconMoon {
+            display: block;
+        }
+
+        html[data-theme='dark'] #iconSun {
+            display: none;
+        }
+
+        /* 🟢 FIXED: About Us Carousel Styles */
+        .about-carousel-wrapper {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            width: 50%;
+            max-width: 500px;
+            border-radius: 18px;
+            /* Using a fixed height or a max-height ensures the slides line up horizontally */
+            /* We will ensure the wrapper takes the space it needs */
+            min-height: 400px;
+            max-height: 550px;
+
+            /* Using theme variables */
+            border: 6px solid var(--color-bg-primary, var(--white));
+            box-shadow: var(--color-shadow, 0 10px 30px rgba(255, 156, 194, .25));
+        }
+
+        /* The track must be absolute to fill the wrapper height */
+        .about-carousel-track {
+            display: flex;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 300%;
+            height: 100%;
+            transition: transform 0.8s ease-in-out;
+        }
+
+        .about-carousel-slide {
+            width: calc(100% / 3);
+            /* Each slide takes 1/3 of the track width */
+            flex-shrink: 0;
+            height: 100%;
+            /* Fill the constrained height of the track */
+            display: block;
+            object-fit: cover;
+            /* Ensures images fill the space */
+        }
+
+        .about-carousel-nav {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .about-dot {
+            height: 10px;
+            width: 10px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .about-dot.active {
+            background-color: var(--color-pink-600, #ff6fae);
+            transform: scale(1.2);
+            border: 1px solid var(--color-pink-600, #ff6fae);
+        }
+
+        /* Mobile adjustment for the carousel wrapper */
+        @media (max-width: 1000px) {
+            .about-carousel-wrapper {
+                width: 100%;
+                max-width: none;
+            }
+        }
+        
+        /* 🟢 NEW: Scroll Button Styles (Copied from products.html) */
+        #scrollButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 999;
+            /* Inherit styling from nav-action but make it stand out slightly */
+            background: var(--color-pink-600, #ff6fae);
+            color: var(--color-white, #ffffff);
+            border: none;
+            box-shadow: 0 4px 15px rgba(255, 110, 174, 0.4);
+            transition: opacity 0.3s, transform 0.3s, background 0.3s;
+            opacity: 0;
+            /* Hidden by default */
+            visibility: hidden;
+        }
+
+        #scrollButton.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #scrollButton:hover {
+            transform: scale(1.05);
+            background: var(--color-pink-500, #ff9ecb);
+        }
+
+        #scrollButton svg {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV: logo stânga, meniu dreapta -->
+    <header class="site-nav">
+        <div class="nav-inner">
+
+            <a href="index.html" class="brand">
+                <img src="img/logo-removebg.png" alt="SugarBloom logo" width="110" height="auto">
+            </a>
+
+            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3" y="6" width="18" height="2" rx="1" fill="currentColor" />
+                    <rect x="3" y="11" width="18" height="2" rx="1" fill="currentColor" />
+                    <rect x="3" y="16" width="18" height="2" rx="1" fill="currentColor" />
+                </svg>
+            </button>
+
+            <nav class="nav-links" id="navLinks">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about-us.html" class="active">ABOUT US</a></li>
+                    <li><a href="products.html">PRODUCTS</a></li>
+                    <li><a href="events.html">EVENTS &amp; CATERING</a></li>
+                    <li><a href="workshops.html">WORKSHOPS</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </nav>
+            <a href="contact.html" class="nav-action help-button" aria-label="Go to Contact for Help">Help</a>
+
+
+            <!-- 🟢 UPDATED: Theme Toggle Button with both SVGs -->
+            <button id="themeToggle" class="nav-action theme-toggle" aria-label="Toggle light/dark theme">
+                <!-- Sun Icon (Light Mode) -->
+                <svg id="iconSun" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor"
+                        d="M12 4a1 1 0 0 1 1-1h0a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V4zm0 16a1 1 0 0 1 1 1h0a1 1 0 0 1-1 1 1 1 0 0 1-1-1v-1a1 1 0 1 1 2 0v1zM4 13a1 1 0 1 1 0-2H5a1 1 0 1 1 0 2H4zm15 0a1 1 0 1 1 0-2h1a1 1 0 1 1 0 2h-1zM5.6 6.0a1 1 0 0 1 1.4-1.4l.7.7A1 1 0 1 1 6.3 6.7l-.7-.7zm11.3 11.3a1 1 0 0 1 1.4 1.4l-.7.7a1 1 0 0 1-1.4-1.4l.7-.7zM6.3 17.3a1 1 0 0 1-1.4 1.4l-.7-.7a1 1 0 1 1 1.4-1.4l.7.7zm12.1-11.7a1 1 0 0 1 1.4 1.4l-.7.7a1 1 0 1 1-1.4-1.4l.7-.7zM12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8z" />
+                </svg>
+                <!-- Moon Icon (Dark Mode) -->
+                <svg id="iconMoon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor"
+                        d="M10.85 3.3a.75.75 0 0 0-.71.55c-.24 1.25-.36 2.5-.32 3.75s.18 2.5.49 3.74c.3 1.25.75 2.45 1.34 3.61.6 1.15 1.33 2.22 2.19 3.19a.75.75 0 0 0 1.26-.6c.22-1.25.33-2.5.28-3.75-.06-1.25-.26-2.5-.58-3.74-.31-1.25-.76-2.45-1.34-3.61-.6-1.15-1.33-2.22-2.18-3.19a.75.75 0 0 0-.55-.37zM12 2a10 10 0 1 0 10 10c0-5.52-4.48-10-10-10z" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- SUB-HEADER -->
+    <section class="sub-header">
+        <h1>About us</h1>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about-us">
+        <div class="row">
+            <div class="principalul">
+                <h1>🌸 Welcome to Sugarbloom 🌸</h1>
+                <p>At Sugarbloom, every dessert tells a sweet story. We started with the dream of bringing smiles
+                    through delicate flavors, cheerful colors, and treats made with love. Whether it's a fluffy cupcake,
+                    a magical cake, or a crunchy cookie, everything is crafted to be just as beautiful as it is
+                    delicious.</p>
+                <p>We believe in the joy of little things and in the power of desserts to turn an ordinary day into a
+                    magical one.</p>
+                <p>Sugarbloom began with a whisk, a dream, and a sprinkle of magic. What started as a tiny kitchen
+                    experiment — late nights baking cupcakes for friends — soon grew into a sweet adventure. Each recipe
+                    was a little bloom of joy, shared at birthdays, coffee breaks, and cozy gatherings. Word spread,
+                    smiles multiplied, and before long, Sugarbloom blossomed into the bakery it is today: a place where
+                    every treat is made with love, laughter, and a touch of whimsy.</p>
+                <p>We invite you to explore our world of sweetness, where every bite is a celebration of life's little
+                    joys. Whether you're here for a special occasion or just because, we promise to make your experience
+                    at Sugarbloom unforgettable.</p>
+                <a href="products.html" class="button redb">Our Portfolio!</a>
+            </div>
+
+        <img src="img/bakery.jpg" alt="SugarBloom interior" style="width:500px;height:auto;">
+        </div>
+    </section>
+
+    <!-- TESTIMONIALE -->
+    <section class="specialisti">
+        <div class="carousel" aria-label="Testimonials">
+            <button id="prevButton" class="prev-button" aria-label="Previous">‹</button>
+
+            <div class="slide">
+                <h1>Iris K.</h1>
+                <p>“I stopped by for a coffee and left with a box full of pastries. No regrets at all!”</p>
+            </div>
+            <div class="slide">
+                <h1>Mihai T.</h1>
+                <p>“Sugarbloom has quickly become my favorite bakery in town... Every bite is a little moment of joy.”
+                </p>
+            </div>
+            <div class="slide">
+                <h1>Clara D.</h1>
+                <p>“Walking into Sugarbloom feels like walking into a storybook... I can't wait to come back!”</p>
+            </div>
+
+            <button id="nextButton" class="next-button" aria-label="Next">›</button>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <h4>© 2025 SugarBloom. All rights reserved.</h4>
+    </footer>
+
+    <!-- 🟢 NEW: Fixed Scroll Button (Always at the bottom of the body) -->
+    <button id="scrollButton" aria-label="Scroll to Top">
+        <svg id="scrollIcon" viewBox="0 0 24 24" fill="currentColor">
+            <!-- Default Up Arrow -->
+            <path d="M12 4l-8 8h6v8h4v-8h6z" transform="rotate(180 12 12)"/>
+        </svg>
+    </button>
+
+    <!-- 🟢 MODIFIED: Merged and updated JS blocks with Scroll Logic -->
+    <script>
+        // Helper function to update the ARIA label for accessibility
+        function updateThemeUI(theme) {
+            const toggle = document.getElementById('themeToggle');
+            if (toggle) {
+                const targetTheme = theme === 'light' ? 'dark' : 'light';
+                toggle.setAttribute('aria-label', `Toggle to ${targetTheme} theme`);
+            }
+        }
+
+        // Hamburger drawer
+        const btn = document.querySelector('.menu-toggle');
+        const drawer = document.getElementById('navLinks');
+        if (btn && drawer) {
+            btn.addEventListener('click', () => {
+                document.body.classList.toggle('nav-open');
+                btn.setAttribute('aria-expanded', document.body.classList.contains('nav-open'));
+            });
+            drawer.addEventListener('click', e => {
+                if (e.target.tagName === 'A') {
+                    document.body.classList.remove('nav-open');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+
+        // Testimonial Carousel (Manual)
+        let currentSlide = 0;
+        const slides = Array.from(document.querySelectorAll('.slide'));
+        function showSlide(index) {
+            slides.forEach((s, i) => s.style.display = (i === index) ? 'block' : 'none');
+        }
+        document.getElementById('nextButton').addEventListener('click', function () {
+            currentSlide = (currentSlide + 1) % slides.length; showSlide(currentSlide);
+        });
+        document.getElementById('prevButton').addEventListener('click', function () {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length; showSlide(currentSlide);
+        });
+        if (slides.length > 0) showSlide(currentSlide);
+
+
+        // 🟢 NEW: Automatic About Us Carousel Logic
+        const aboutTrack = document.getElementById('aboutCarouselTrack');
+        const aboutDots = Array.from(document.querySelectorAll('.about-dot'));
+        const totalSlides = aboutDots.length;
+        let aboutCurrentIndex = 0;
+        let autoAdvanceInterval;
+
+        function updateAboutCarousel(index) {
+            if (!aboutTrack || totalSlides === 0) return;
+
+            // Calculate the translation distance (e.g., 0%, -33.333%, -66.666%)
+            const translateValue = -index * (100 / totalSlides);
+
+            // Apply the translation to the track
+            aboutTrack.style.transform = `translateX(${translateValue}%)`;
+
+            // Update dots
+            aboutDots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+
+            aboutCurrentIndex = index;
+        }
+
+        function nextAboutSlide() {
+            let nextIndex = (aboutCurrentIndex + 1) % totalSlides;
+            updateAboutCarousel(nextIndex);
+        }
+
+        // Start automatic cycling (every 4 seconds)
+        function startAutoAdvance() {
+            if (autoAdvanceInterval) clearInterval(autoAdvanceInterval); // Clear old one if exists
+            autoAdvanceInterval = setInterval(nextAboutSlide, 4000);
+        }
+
+        // Handle dot clicks
+        aboutDots.forEach((dot) => {
+            dot.addEventListener('click', (e) => {
+                const slideIndex = parseInt(e.target.dataset.slide);
+                updateAboutCarousel(slideIndex);
+                // Reset the timer after manual interaction
+                startAutoAdvance();
+            });
+        });
+
+        // Initialize and start the automatic carousel
+        if (aboutTrack && totalSlides > 1) {
+            updateAboutCarousel(0);
+            startAutoAdvance();
+        }
+
+        // ----------------------------------------------------
+        // 🟢 NEW: Scroll Up/Down Button Logic (Copied from products.html)
+        const scrollButton = document.getElementById('scrollButton');
+        const scrollIconPath = scrollButton.querySelector('path');
+        const topThreshold = 50; // Scroll position to show the button
+        let isAtBottom = false;
+
+        function checkScrollPosition() {
+            const scrollY = window.scrollY;
+            const viewportHeight = window.innerHeight;
+            const contentHeight = document.documentElement.scrollHeight;
+
+            // Determine if the user has scrolled past the top threshold
+            const showButton = scrollY > topThreshold;
+            scrollButton.classList.toggle('visible', showButton);
+
+            // Determine if the user is near the bottom
+            // Check if scrollY + viewportHeight is close to contentHeight
+            isAtBottom = (scrollY + viewportHeight) >= (contentHeight - topThreshold);
+
+            // Toggle icon and aria-label
+            if (isAtBottom) {
+                // Change icon to UP arrow (0 degree rotation)
+                scrollIconPath.setAttribute('transform', 'rotate(0 12 12)');
+                scrollButton.setAttribute('aria-label', 'Scroll to Top');
+            } else {
+                // Change icon to DOWN arrow (180 degree rotation)
+                scrollIconPath.setAttribute('transform', 'rotate(180 12 12)');
+                scrollButton.setAttribute('aria-label', 'Scroll to Bottom');
+            }
+        }
+        
+        function handleScrollButtonClick() {
+            if (isAtBottom) {
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                // Scroll to bottom
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+        }
+
+        // Attach event listeners
+        window.addEventListener('scroll', checkScrollPosition);
+        scrollButton.addEventListener('click', handleScrollButtonClick);
+
+        // Run check once on load to initialize visibility and icon
+        // We use window.addEventListener('load') to ensure the document is fully measured before running this.
+        window.addEventListener('load', checkScrollPosition);
+
+
+        // ----------------------------------------------------
+        // Theme Toggling Logic
+        // 1) Initialization: Set theme from localStorage or system preference
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = localStorage.getItem('sb-theme');
+        let initialTheme;
+
+        if (savedTheme) {
+            initialTheme = savedTheme;
+        } else {
+            initialTheme = prefersDark ? 'dark' : 'light';
+        }
+
+        document.documentElement.dataset.theme = initialTheme;
+        updateThemeUI(initialTheme); // Set initial ARIA label and icon visibility
+
+        // 2) Toggle + persist
+        const toggle = document.getElementById('themeToggle');
+        if (toggle) {
+            toggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.dataset.theme;
+                const next = (currentTheme === 'dark') ? 'light' : 'dark';
+                document.documentElement.dataset.theme = next;
+                localStorage.setItem('sb-theme', next);
+                updateThemeUI(next);
+            });
+        }
+
+        // 3) Listen to system preference changes if no manual preference is saved
+        if (!savedTheme && window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                document.documentElement.dataset.theme = e.matches ? 'dark' : 'light';
+                updateThemeUI(e.matches ? 'dark' : 'light');
+            });
+        }
+    </script>
+
+</body>
+
+</html>
