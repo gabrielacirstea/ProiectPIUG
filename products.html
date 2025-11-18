@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2LC9HPKZ08"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -21,9 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <title>SugarBloom — Products</title>
 
-    <!-- 🟢 NEW: Theme Toggle Button and Table Styles -->
     <style>
-        /* This CSS ensures the correct icon is shown based on the theme */
         .theme-toggle {
             all: unset;
             display: grid;
@@ -33,12 +30,10 @@
             border-radius: 50%;
             cursor: pointer;
             z-index: 1001;
-            /* Styling assumes theme variables from style.css */
             background: var(--color-pink-200, #ffe6f0);
             box-shadow: var(--color-shadow, 0 8px 18px rgba(255, 110, 174, .25));
             transition: background .25s ease, box-shadow .25s ease, transform .15s ease;
             margin-left: 10px;
-            /* Separator from menu-toggle */
         }
 
         .theme-toggle:hover {
@@ -48,11 +43,9 @@
         .theme-toggle svg {
             width: 22px;
             height: 22px;
-            /* Icon color assumes theme variables from style.css */
             color: var(--color-rose-700, #a2476a);
         }
         
-        /* Help Button Styles (to match theme toggle) */
         .nav-action {
             all: unset;
             display: flex;
@@ -86,7 +79,6 @@
         }
 
 
-        /* Icon Toggling Logic */
         html[data-theme='light'] #iconMoon {
             display: none;
         }
@@ -103,13 +95,11 @@
             display: none;
         }
 
-        /* Table Styling for Options */
         .options-table {
             width: 100%;
             margin-top: 25px;
             border-collapse: collapse;
             font-size: 14px;
-            /* Use theme colors */
             background: var(--color-bg-secondary, #fff2f7); 
             border: 1px solid var(--color-border-primary, #ffd6e8);
             border-radius: 12px;
@@ -121,7 +111,6 @@
             font-weight: 700;
             font-size: 18px;
             margin-bottom: 10px;
-            /* Use theme colors */
             color: var(--color-rose-700, #a2476a);
             text-align: left;
             padding: 8px 0;
@@ -130,12 +119,10 @@
         .options-table th, .options-table td {
             padding: 10px 15px;
             text-align: left;
-            /* Use theme colors */
             color: var(--color-text-primary, #4b2e3b); 
         }
 
         .options-table th {
-            /* Use theme colors */
             background: var(--color-pink-300, #ffd6e8);
             color: var(--color-ink, #4b2e3b);
             font-weight: 700;
@@ -143,16 +130,13 @@
         }
 
         .options-table tr:nth-child(even) {
-            /* Use theme colors */
             background: var(--color-pink-100, #fff2f7);
         }
         
         .options-table tr:hover {
-            /* Use theme colors */
             background: var(--color-pink-200, #ffe6f0);
         }
         
-        /* 🟢 NEW: Scroll Button Styles */
         #scrollButton {
             position: fixed;
             bottom: 20px;
@@ -165,13 +149,12 @@
             border-radius: 50%;
             cursor: pointer;
             z-index: 999;
-            /* Inherit styling from nav-action but make it stand out slightly */
             background: var(--color-pink-600, #ff6fae); 
             color: var(--color-white, #ffffff);
             border: none;
             box-shadow: 0 4px 15px rgba(255, 110, 174, 0.4);
             transition: opacity 0.3s, transform 0.3s, background 0.3s;
-            opacity: 0; /* Hidden by default */
+            opacity: 0;
             visibility: hidden;
         }
 
@@ -220,14 +203,11 @@
             </nav>
             <a href="contact.html" class="nav-action help-button" aria-label="Go to Contact for Help">Help</a>
 
-            <!-- 🟢 UPDATED: Theme Toggle Button with both SVGs -->
             <button id="themeToggle" class="theme-toggle" aria-label="Toggle light/dark theme">
-                <!-- Sun Icon (Light Mode) -->
                 <svg id="iconSun" viewBox="0 0 24 24" aria-hidden="true">
                     <path fill="currentColor"
                         d="M12 4a1 1 0 0 1 1-1h0a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V4zm0 16a1 1 0 0 1 1 1h0a1 1 0 0 1-1 1 1 1 0 0 1-1-1v-1a1 1 0 1 1 2 0v1zM4 13a1 1 0 1 1 0-2H5a1 1 0 1 1 0 2H4zm15 0a1 1 0 1 1 0-2h1a1 1 0 1 1 0 2h-1zM5.6 6.0a1 1 0 0 1 1.4-1.4l.7.7A1 1 0 1 1 6.3 6.7l-.7-.7zm11.3 11.3a1 1 0 0 1 1.4 1.4l-.7.7a1 1 0 0 1-1.4-1.4l.7-.7zM6.3 17.3a1 1 0 0 1-1.4 1.4l-.7-.7a1 1 0 1 1 1.4-1.4l.7.7zm12.1-11.7a1 1 0 0 1 1.4 1.4l-.7.7a1 1 0 1 1-1.4-1.4l.7-.7zM12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8z" />
                 </svg>
-                <!-- Moon Icon (Dark Mode) -->
                 <svg id="iconMoon" viewBox="0 0 24 24" aria-hidden="true">
                     <path fill="currentColor"
                         d="M10.85 3.3a.75.75 0 0 0-.71.55c-.24 1.25-.36 2.5-.32 3.75s.18 2.5.49 3.74c.3 1.25.75 2.45 1.34 3.61.6 1.15 1.33 2.22 2.19 3.19a.75.75 0 0 0 1.26-.6c.22-1.25.33-2.5.28-3.75-.06-1.25-.26-2.5-.58-3.74-.31-1.25-.76-2.45-1.34-3.61-.6-1.15-1.33-2.22-2.18-3.19a.75.75 0 0 0-.55-.37zM12 2a10 10 0 1 0 10 10c0-5.52-4.48-10-10-10z" />
@@ -243,12 +223,10 @@
         <div class="search-box">
             <label for="search" class="search-label">Search</label>
             <input id="search" type="search" placeholder="Search" autocomplete="off">
-            <!-- dropdown cu rezultate -->
             <ul id="search-results" class="search-results" hidden></ul>
         </div>
     </section>
 
-    <!-- sursa de căutat: poți folosi lista existentă sau generată din pagină -->
     <ul id="items" hidden>
         <li class="item" data-url="events.html#birthday" data-keywords="birthday sweet table">Birthday Sweet Table</li>
         <li class="item" data-url="events.html#wedding" data-keywords="wedding candy bar">Wedding Candy Bar</li>
@@ -265,14 +243,12 @@
         </li>
     </ul>
     <section class="Proiect">
-        <!-- WEDDING CAKE OPTIONS -->
         <div class="rowo">
             <img src="img/weddingCake.jpg" style="width:500px; height: 600px;">
             <div class="proiectul">
                 <h2>Wedding cake</h2>
                 <p>At Sugarbloom, we believe your wedding cake should be as magical as your love story. Each tier is crafted with elegance, soft flavors, and delicate decorations — from sugar flowers that never wilt to silky frosting that melts in every smile. Whether you dream of something classic or whimsical, we'll make sure your cake is the centerpiece of your happily ever after.</p>
                 
-                <!-- NEW TABLE: Wedding Cake Options -->
                 <table class="options-table">
                     <caption>Customization Options</caption>
                     <thead>
@@ -299,14 +275,12 @@
             </div>
         </div>
 
-        <!-- OCCASION CAKE OPTIONS -->
         <div class="rowo">
             <img src="img/cake.jpg" style="width:500px; height: 600px;">
             <div class="proiectul">
                 <h2>Ocassion cake</h2>
                 <p>Every celebration deserves a show-stopper! From fun and colorful birthday cakes to elegant anniversary delights, Sugarbloom creates cakes that make memories sweeter. Playful sprinkles, creamy layers, or personalized designs — whatever your wish, we'll turn it into a cake that sparks joy and makes the occasion unforgettable.</p>
                 
-                <!-- NEW TABLE: Occasion Cake Options -->
                 <table class="options-table">
                     <caption>Customization Options</caption>
                     <thead>
@@ -333,7 +307,6 @@
             </div>
         </div>
 
-        <!-- SWEET TREATS OPTIONS -->
         <div class="rowo">
             <img src="img/candyBar.jpg" style="width:500px; height: 600px;">
             <div class="proiectul">
@@ -341,7 +314,6 @@
                 <h2>Sweet treats</h2>
                 <p>Not every sweet moment needs a big occasion — sometimes it's about that cozy cookie with your coffee, a fluffy cupcake on a rainy day, or a little tart that feels like sunshine. Our sweet treats are baked fresh daily, with a sprinkle of love and a touch of whimsy, perfect for sharing… or keeping all to yourself.</p>
                 
-                <!-- NEW TABLE: Sweet Treats Options -->
                 <table class="options-table">
                     <caption>Available Varieties</caption>
                     <thead>
@@ -373,17 +345,13 @@
         <h4>© 2025 SugarBloom. All rights reserved.</h4>
     </footer>
 
-    <!-- 🟢 NEW: Fixed Scroll Button (Always at the bottom of the body) -->
     <button id="scrollButton" aria-label="Scroll to Top">
         <svg id="scrollIcon" viewBox="0 0 24 24" fill="currentColor">
-            <!-- Default Up Arrow -->
             <path d="M12 4l-8 8h6v8h4v-8h6z" transform="rotate(180 12 12)"/>
         </svg>
     </button>
     
-    <!-- 🟢 MODIFIED: Merged and updated JS blocks with Scroll Logic -->
     <script>
-        // Helper function to update the ARIA label and icon visibility
         function updateThemeUI(theme) {
             const toggle = document.getElementById('themeToggle');
             if (toggle) {
@@ -392,7 +360,6 @@
             }
         }
 
-        // Hamburger drawer logic
         const btn = document.querySelector('.menu-toggle');
         const drawer = document.getElementById('navLinks');
         if (btn && drawer) {
@@ -408,7 +375,6 @@
             });
         }
 
-        // Search functionality (re-merged)
         const DB = [...document.querySelectorAll('#items .item')].map(li => ({
             title: li.textContent.trim(),
             url: li.dataset.url || '#',
@@ -447,11 +413,9 @@
             return text.replace(re, '<mark style="background:#ff9ecb52;border-radius:4px;">$1</mark>');
         }
 
-        // ----------------------------------------------------
-        // 🟢 NEW: Scroll Up/Down Button Logic
         const scrollButton = document.getElementById('scrollButton');
         const scrollIconPath = scrollButton.querySelector('path');
-        const topThreshold = 50; // Scroll position to show the button
+        const topThreshold = 50;
         let isAtBottom = false;
 
         function checkScrollPosition() {
@@ -459,21 +423,15 @@
             const viewportHeight = window.innerHeight;
             const contentHeight = document.documentElement.scrollHeight;
 
-            // Determine if the user has scrolled past the top threshold
             const showButton = scrollY > topThreshold;
             scrollButton.classList.toggle('visible', showButton);
 
-            // Determine if the user is near the bottom
-            // Check if scrollY + viewportHeight is close to contentHeight
             isAtBottom = (scrollY + viewportHeight) >= (contentHeight - topThreshold);
 
-            // Toggle icon and aria-label
             if (isAtBottom) {
-                // Change icon to UP arrow (0 degree rotation)
                 scrollIconPath.setAttribute('transform', 'rotate(0 12 12)');
                 scrollButton.setAttribute('aria-label', 'Scroll to Top');
             } else {
-                // Change icon to DOWN arrow (180 degree rotation)
                 scrollIconPath.setAttribute('transform', 'rotate(180 12 12)');
                 scrollButton.setAttribute('aria-label', 'Scroll to Bottom');
             }
@@ -481,25 +439,18 @@
         
         function handleScrollButtonClick() {
             if (isAtBottom) {
-                // Scroll to top
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
-                // Scroll to bottom
                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
             }
         }
 
-        // Attach event listeners
         window.addEventListener('scroll', checkScrollPosition);
         scrollButton.addEventListener('click', handleScrollButtonClick);
 
-        // Run check once on load to initialize visibility and icon
         window.onload = checkScrollPosition;
 
 
-        // ----------------------------------------------------
-        // Theme Toggling Logic
-        // 1) Initialization: Set theme from localStorage or system preference
         const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         const savedTheme = localStorage.getItem('sb-theme');
         let initialTheme;
@@ -511,9 +462,8 @@
         }
 
         document.documentElement.dataset.theme = initialTheme;
-        updateThemeUI(initialTheme); // Set initial ARIA label/icon
+        updateThemeUI(initialTheme);
 
-        // 2) Toggle + persist
         const toggle = document.getElementById('themeToggle');
         if (toggle) {
             toggle.addEventListener('click', () => {
@@ -521,15 +471,14 @@
                 const next = (currentTheme === 'dark') ? 'light' : 'dark';
                 document.documentElement.dataset.theme = next;
                 localStorage.setItem('sb-theme', next);
-                updateThemeUI(next); // Update ARIA label/icon
+                updateThemeUI(next);
             });
         }
 
-        // 3) Listen to system preference changes if no manual preference is saved
         if (!savedTheme && window.matchMedia) {
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
                 document.documentElement.dataset.theme = e.matches ? 'dark' : 'light';
-                updateThemeUI(e.matches ? 'dark' : 'light'); // Update ARIA label/icon
+                updateThemeUI(e.matches ? 'dark' : 'light');
             });
         }
     </script>

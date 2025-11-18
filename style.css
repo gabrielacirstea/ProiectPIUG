@@ -1,64 +1,49 @@
-/* ---------------------------------------
-  SugarBloom – Cute & Whimsical Theme
-  Adapted for Light / Dark Theme
----------------------------------------- */
+
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Parisienne&display=swap');
 
-/* ====================================
-   Theme Variables - LIGHT (Default)
-   ==================================== */
+
 :root{
-  /* Base Pink Palette (The accent colors remain the same for brand identity) */
   --color-pink-100: #fff2f7;
   --color-pink-200: #ffe6f0;
   --color-pink-300: #ffd6e8;
   --color-pink-400: #ffbcd4;
   --color-pink-500: #ff9ecb;
-  --color-pink-600: #ff6fae; /* Main Accent Color */
-  --color-rose-700: #a2476a; /* Title/Secondary Accent Color */
+  --color-pink-600: #ff6fae; 
+  --color-rose-700: #a2476a; 
 
-  /* Theme Roles - Generic Variables (Light Mode values) */
-  --color-bg-primary: #ffffff;      /* Main background (e.g., nav, forms, footer base) */
-  --color-bg-secondary: var(--color-pink-100); /* Secondary/Card background */
-  --color-text-primary: #4b2e3b;    /* Main text color (was --ink) */
-  --color-text-secondary: #6b4a58;  /* Paragraph/Secondary text color */
-  --color-text-meta: #8a6273;       /* Smaller/Footnote text color */
+  --color-bg-primary: #ffffff;      
+  --color-bg-secondary: var(--color-pink-100); 
+  --color-text-primary: #4b2e3b;    
+  --color-text-secondary: #6b4a58;  
+  --color-text-meta: #8a6273;      
   --color-border-primary: var(--color-pink-300);
 
-  /* Shared/Special Variables */
   --color-ink: #4b2e3b;
   --color-white: #ffffff;
   --color-shadow: 0 10px 30px rgba(255, 156, 194, .25);
 }
 
-/* ====================================
-   Theme Variables - DARK Mode
-   (Apply [data-theme='dark'] to <body> or <html>)
-   ==================================== */
+
 [data-theme='dark'] {
-  /* Theme Roles - Dark Mode values */
-  --color-bg-primary: #1e151a;            /* Very dark purple-brown */
-  --color-bg-secondary: #2b1f24;          /* Slightly lighter card background */
-  --color-text-primary: #f0e6eb;          /* Very light text */
-  --color-text-secondary: #d4c3cb;        /* Light grey-pink text */
+  --color-bg-primary: #1e151a;            
+  --color-bg-secondary: #2b1f24;        
+  --color-text-primary: #f0e6eb;      
+  --color-text-secondary: #d4c3cb;    
   --color-text-meta: #b099a4;
   --color-border-primary: #5c414e;
 
-  /* Adjustments for the pink palette in Dark Mode (keeping the light/dark contrast) */
-  --color-pink-100: #423038; /* Used for gradients that switch from secondary to primary */
+  --color-pink-100: #423038; 
   --color-pink-200: #553e47;
   --color-pink-300: #5c414e;
-  --color-rose-700: #ff9ecb; /* Make the titles/accents bright pink for contrast */
-  --color-ink: #f0e6eb; /* Dark ink is now light */
+  --color-rose-700: #ff9ecb; /
+  --color-ink: #f0e6eb; 
 
-  /* Darker Shadow */
   --color-shadow: 0 10px 30px rgba(0, 0, 0, .6);
 }
 
-/* Apply main background color to body for full page coverage */
 body {
   background-color: var(--color-bg-primary);
-  transition: background-color 0.3s ease; /* Smooth transition for theme toggle */
+  transition: background-color 0.3s ease; 
 }
 
 *{
@@ -66,29 +51,24 @@ body {
   padding:0;
   box-sizing: border-box;
   font-family: "Quicksand","PT Sans Narrow", sans-serif;
-  /* Use generic text variable */
   color: var(--color-text-primary); 
 }
 
-/* ---------- HEADER / HERO ---------- */
 .header{
   min-height:100vh;
   width:100%;
-  /* Keep image, linear gradient is light-specific but acceptable for effect */
   background:
     linear-gradient(180deg, rgba(255,214,232,.75), rgba(255,242,247,.75)),
     url("img/background.jpg") center/cover no-repeat;
   position: relative;
 }
 
-/* Dark mode adjustment for the header overlay to make it less bright on dark background */
 [data-theme='dark'] .header{
   background:
     linear-gradient(180deg, rgba(30, 21, 26, .75), rgba(43, 31, 36, .75)),
     url("img/background.jpg") center/cover no-repeat;
 }
 .header::after{
-  /* Keep sparkle overlay */
   content:"";
   position:absolute; inset:0;
   background-image:
@@ -101,11 +81,9 @@ body {
   opacity:.2;
 }
 [data-theme='dark'] .header::after {
-  /* Reduce sparkle opacity in dark mode */
   opacity: .1;
 }
 
-/* ---------- NAV: logo left, menu right ---------- */
 nav{
   position: sticky; top:0; z-index: 1000;
   display:flex;
@@ -113,11 +91,9 @@ nav{
   justify-content: space-between;
   gap: 24px;
   padding: 14px 24px;
-  /* Use generic background/border variables */
   background: var(--color-bg-primary);
   border-bottom: 1px solid var(--color-border-primary);
 }
-/* nav img filter might need adjustment for dark mode logo */
 nav img{
   width:110px;
   height:auto;
@@ -136,7 +112,6 @@ nav img{
 }
 .nav-links ul li{ position: relative; }
 .nav-links ul li a{
-  /* Use generic text variable */
   color: var(--color-text-primary); 
   text-decoration:none;
   font-size:16px;
@@ -156,17 +131,14 @@ nav img{
 }
 .nav-links ul li:hover::after{ width:100%; }
 .nav-links ul li a:hover{
-  /* Use generic pink variables */
   background: var(--color-pink-200);
   box-shadow: var(--color-shadow);
 }
 .nav-links ul li a.active{
-  /* Use generic pink/rose variables */
   background: var(--color-pink-200);
   color: var(--color-rose-700);
 }
 
-/* ---------- HERO TEXT BOX ---------- */
 .text-box{
   width:min(900px, 92%);
   position:absolute;
@@ -174,10 +146,8 @@ nav img{
   left:50%;
   transform: translate(-50%,-50%);
   text-align:center;
-  /* Use generic text variable */
   color: var(--color-text-primary);
   padding: 28px 24px;
-  /* Adjust transparency/border for dark mode */
   background: rgba(255,255,255,.55);
   backdrop-filter: blur(6px);
   border: 1px solid rgba(255,182,193,.5);
@@ -193,7 +163,6 @@ nav img{
   font-family: "Parisienne", cursive;
   font-size: clamp(42px, 6vw, 78px);
   line-height:1.05;
-  /* Use generic accent variable */
   color: var(--color-rose-700);
   text-shadow: 0 3px 12px rgba(255,110,174,.25);
   letter-spacing:.5px;
@@ -201,21 +170,17 @@ nav img{
 .text-box p{
   margin:10px 0 28px;
   font-size: 16px;
-  /* Use generic text variable */
   color: var(--color-text-secondary);
 }
 
-/* ---------- BUTTONS ---------- */
 .button{
   display:inline-block;
   text-decoration:none;
-  /* Use generic pink/white variable */
   color: var(--color-white);
   border:none;
   padding:14px 28px;
   font-size: 16px;
   font-weight:700;
-  /* Use generic pink variables */
   background: linear-gradient(135deg, var(--color-pink-600), var(--color-pink-500));
   border-radius: 999px;
   box-shadow: var(--color-shadow);
@@ -230,14 +195,11 @@ nav img{
 }
 nav .fas{ display:none; }
 
-/* ---------- MOBILE NAV ---------- */
 @media(max-width:700px){
   .text-box h1{ font-size: clamp(28px, 10vw, 44px); }
 
-  /* slide-in menu */
   .nav-links{
     position:fixed;
-    /* Use generic pink variables */
     background: linear-gradient(180deg, var(--color-pink-500), var(--color-pink-300));
     height: 100vh;
     width: 240px;
@@ -254,7 +216,6 @@ nav .fas{ display:none; }
   .nav-links ul{ flex-direction: column; gap: 14px; }
   nav .fas{
     display:block;
-    /* Use generic rose variable */
     color: var(--color-rose-700);
     margin:10px;
     font-size:22px;
@@ -262,16 +223,13 @@ nav .fas{ display:none; }
   }
 }
 
-/*--- SUB-HEADER (inner pages) ---*/
 .sub-header{
   height:50vh;
   width:100%;
-  /* Keep image, linear gradient is light-specific but acceptable for effect */
   background:
     linear-gradient(180deg, rgba(255,236,244,.7), rgba(255,230,240,.7)),
     url("img/background.jpg") center/cover no-repeat;
   text-align: center;
-  /* Use generic text variable */
   color: var(--color-text-primary);
   display:flex;
   align-items:center;
@@ -286,11 +244,9 @@ nav .fas{ display:none; }
   margin-top: 0;
   font-family:"Parisienne",cursive;
   font-size: clamp(36px, 6vw, 64px);
-  /* Use generic accent variable */
   color: var(--color-rose-700);
 }
 
-/*--- ABOUT US ---*/
 .about-us{
   width:min(1100px, 92%);
   margin:auto;
@@ -307,7 +263,6 @@ nav .fas{ display:none; }
   width:50%;
   margin-right: 0;
   border-radius: 18px;
-  /* Use generic white/shadow variable */
   border: 6px solid var(--color-bg-primary); 
   box-shadow: var(--color-shadow);
 }
@@ -315,18 +270,15 @@ nav .fas{ display:none; }
   padding-top: 0;
   flex:1;
   font-family:"Parisienne",cursive;
-  /* Use generic accent variable */
   color: var(--color-rose-700);
 }
 .principalul p{
   padding:15px 0 20px;
   flex:1;
   line-height: 1.75;
-  /* Use generic text variable */
   color: var(--color-text-secondary);
 }
 .redb{
-  /* Use generic pink/white variable */
   border:2px solid var(--color-pink-600);
   background: transparent;
   color: var(--color-pink-600);
@@ -336,20 +288,17 @@ nav .fas{ display:none; }
   transition:.3s ease;
 }
 .redb:hover{
-  /* Use generic pink/white/shadow variable */
   color: var(--color-white);
   background: var(--color-pink-600);
   box-shadow: var(--color-shadow);
 }
 
-/*--- FEATURE ROW (rowo) ---*/
 .rowo {
   width:min(1100px, 92%);
   display: flex;
   margin: 5% auto;
   align-items: center;
   gap: 22px;
-  /* Use generic theme variables */
   background: linear-gradient(180deg, var(--color-bg-secondary), var(--color-bg-primary));
   border:1px solid var(--color-border-primary);
   border-radius: 20px;
@@ -381,11 +330,9 @@ nav .fas{ display:none; }
 h2 {
     font-weight: 700;
     margin: 10px 0;
-    /* Use generic accent variable */
     color: var(--color-rose-700);
 }
 
-/*--- LOCATION / CONTACT ---*/
 .location{
   width:80%;
   margin:auto;
@@ -393,7 +340,6 @@ h2 {
 }
 .location iframe{
   width:100%;
-  /* Use generic white/shadow variable */
   border:8px solid var(--color-bg-primary); 
   border-radius: 16px;
   box-shadow: var(--color-shadow);
@@ -421,7 +367,6 @@ h2 {
   padding:15px;
   margin-bottom: 17px;
   outline:none;
-  /* Use generic border/bg variables */
   border:1.5px solid var(--color-border-primary);
   border-radius: 14px;
   background: var(--color-bg-primary); 
@@ -430,12 +375,10 @@ h2 {
 }
 .column input:focus,
 .column textarea:focus{
-  /* Use generic pink/shadow variable */
   border-color: var(--color-pink-600);
   box-shadow: 0 0 0 6px rgba(255,110,174,.15);
 }
 
-/*--- CAROUSEL ---*/
 .carousel {
   display: flex;
   justify-content: space-between;
@@ -448,7 +391,6 @@ h2 {
 .next-button {
   padding: 10px 14px;
   font-size: 16px;
-  /* Keep pink gradient and white text */
   background: linear-gradient(135deg, var(--color-pink-600), var(--color-pink-500));
   color: var(--color-white);
   border: none;
@@ -465,7 +407,6 @@ h2 {
 .slide {
   width: 80%;
   display: none;
-  /* Use generic white/shadow variable */
   border: 10px solid var(--color-bg-primary);
   border-radius: 16px;
   transition: box-shadow 0.3s ease, transform .3s ease;
@@ -476,12 +417,10 @@ h2 {
   box-shadow: 0 10px 24px rgba(255,110,174,.25);
 }
 
-/*--- FOOTER ---*/
 .footer{
   width:100%;
   text-align:center ;
   padding:36px 0 48px;
-  /* Use generic theme variables */
   background: linear-gradient(180deg, var(--color-bg-primary), var(--color-bg-secondary));
   border-top: 1px solid var(--color-border-primary);
 }
@@ -489,11 +428,9 @@ h2 {
   margin-bottom: 6px;
   margin-top:8px;
   font-weight: 700;
-  /* Use generic accent variable */
   color: var(--color-rose-700);
 }
 
-/* --- Events & Catering page --- */
 .events.container{
   padding: 60px 0;
   text-align: center;
@@ -503,7 +440,6 @@ h2 {
   margin: 0 auto 50px;
   font-size: 18px;
   line-height: 1.8;
-  /* Use generic text variable */
   color: var(--color-text-secondary);
 }
 .offers{
@@ -512,7 +448,6 @@ h2 {
   gap: 28px;
 }
 .offer-card{
-  /* Use generic theme variables */
   background: var(--color-bg-secondary);
   border: 2px solid var(--color-border-primary);
   border-radius: 20px;
@@ -527,7 +462,6 @@ h2 {
 }
 .offer-card h2{
   font-family: "Parisienne", cursive;
-  /* Use generic accent variable */
   color: var(--color-rose-700);
   font-size: 28px;
   margin-bottom: 8px;
@@ -535,7 +469,6 @@ h2 {
 .offer-card .price{
   font-size: 20px;
   font-weight: bold;
-  /* Use generic pink variable */
   color: var(--color-pink-600);
   margin-bottom: 16px;
 }
@@ -544,13 +477,11 @@ h2 {
   padding: 0;
   margin: 0 0 20px;
   line-height: 1.8;
-  /* Use generic text variable */
   color: var(--color-text-primary);
 }
 .offer-card ul li{ margin-bottom: 6px; }
 .offer-card .button{ display: inline-block; margin-top: 8px; }
 
-/* --- Workshops & Classes --- */
 .workshops.container{
   padding: 60px 0 80px;
 }
@@ -560,7 +491,6 @@ h2 {
   text-align: center;
   font-size: 18px;
   line-height: 1.8;
-  /* Use generic text variable */
   color: var(--color-text-secondary);
 }
 .class-grid{
@@ -570,7 +500,6 @@ h2 {
   margin-bottom: 36px;
 }
 .class-card{
-  /* Use generic theme variables */
   background: var(--color-bg-secondary);
   border: 2px solid var(--color-border-primary);
   border-radius: 20px;
@@ -584,13 +513,11 @@ h2 {
 }
 .class-card .class-top h2{
   font-family: "Parisienne", cursive;
-  /* Use generic accent variable */
   color: var(--color-rose-700);
   font-size: 26px;
   margin-bottom: 4px;
 }
 .class-card .meta{
-  /* Use generic meta text variable */
   color: var(--color-text-meta);
   font-size: 14px;
   margin-bottom: 12px;
@@ -598,7 +525,6 @@ h2 {
 .class-card .includes{
   margin: 0 0 14px;
   padding-left: 18px;
-  /* Use generic text variable */
   color: var(--color-text-primary);
   line-height: 1.7;
 }
@@ -611,17 +537,13 @@ h2 {
   font-weight: 700;
 }
 .class-card .date{ 
-  /* Use generic text variable */
   color: var(--color-text-secondary); 
 }
 .class-card .price{ 
-  /* Use generic pink variable */
   color: var(--color-pink-600); 
 }
 
-/* what to expect */
 .what-expect{
-  /* Use generic theme variables */
   background: linear-gradient(180deg, var(--color-bg-secondary), var(--color-bg-primary));
   border: 1px solid var(--color-border-primary);
   border-radius: 18px;
@@ -630,7 +552,6 @@ h2 {
 }
 .what-expect h3{
   font-family: "Parisienne", cursive;
-  /* Use generic accent variable */
   color: var(--color-rose-700);
   margin-bottom: 8px;
   font-size: 26px;
@@ -642,9 +563,7 @@ h2 {
   padding-left: 18px;
 }
 
-/* signup form */
 .signup{
-  /* Use generic theme variables */
   background: var(--color-bg-secondary);
   border: 2px solid var(--color-border-primary);
   border-radius: 20px;
@@ -654,7 +573,6 @@ h2 {
 }
 .signup h3{
   font-family: "Parisienne", cursive;
-  /* Use generic accent variable */
   color: var(--color-rose-700);
   margin-bottom: 10px;
   font-size: 26px;
@@ -675,7 +593,6 @@ h2 {
 .signup-form textarea{
   width: 100%;
   padding: 12px 14px;
-  /* Use generic theme variables */
   border: 1.5px solid var(--color-border-primary);
   border-radius: 12px;
   background: var(--color-bg-primary); 
@@ -685,7 +602,6 @@ h2 {
 .signup-form input:focus,
 .signup-form select:focus,
 .signup-form textarea:focus{
-  /* Use generic pink/shadow variable */
   border-color: var(--color-pink-600);
   box-shadow: 0 0 0 6px rgba(255,110,174,.15);
 }
@@ -693,22 +609,18 @@ h2 {
 .signup .footnote{
   margin-top: 8px;
   text-align: center;
-  /* Use generic meta text variable */
   color: var(--color-text-meta);
   font-size: 14px;
 }
 
-/* FAQ */
 .faq{ margin-top: 20px; }
 .faq h3{
   font-family: "Parisienne", cursive;
-  /* Use generic accent variable */
   color: var(--color-rose-700);
   margin-bottom: 10px;
   font-size: 26px;
 }
 .faq details{
-  /* Use generic theme variables */
   background: var(--color-bg-secondary);
   border: 1px solid var(--color-border-primary);
   border-radius: 14px;
@@ -718,12 +630,10 @@ h2 {
 .faq summary{
   cursor: pointer;
   font-weight: 700;
-  /* Use generic text variable */
   color: var(--color-text-primary);
 }
 .faq p{ margin-top: 8px; }
 
-/* responsive tweaks */
 @media (max-width: 1000px){
   .about-us .row{ flex-direction: column; }
 }
@@ -731,10 +641,7 @@ h2 {
   .signup-form .grid{ grid-template-columns: 1fr; }
 }
 
-/* --- HAMBURGER: ascuns pe desktop, arată pe mobil --- */
-/* (Mobile nav gradient and text colors updated to use generic theme variables) */
 
-/* reset + ascuns implicit */
 .menu-toggle{
   all: unset;
   display: none; 
@@ -749,20 +656,17 @@ h2 {
   z-index: 1101;
 }
 
-/* sigur ascuns pe ecrane mari */
 @media (min-width: 961px){
   .menu-toggle{ display: none !important; }
   .nav-links{ position: static; transform: none; width: auto; }
   .nav-links ul{ display:flex; gap:22px; }
 }
 
-/* vizibil doar pe mobil + drawer în dreapta */
 @media (max-width: 960px){
   .menu-toggle{ display: grid !important; margin-left: auto; }
   .nav-links{
     position: fixed; inset: 0 0 0 auto;
     width: min(80vw, 320px);
-    /* Use generic pink variables */
     background: linear-gradient(180deg, var(--color-pink-500), var(--color-pink-300));
     transform: translateX(100%);
     transition: transform .45s ease;
@@ -774,7 +678,6 @@ h2 {
   .nav-links ul{ display:flex; flex-direction:column; gap:16px; }
 }
 
-/* nav container (dacă nu-l ai deja) */
 .site-nav .nav-inner{
   max-width: 1200px;
   margin: 0 auto;
@@ -782,7 +685,6 @@ h2 {
   display:flex; align-items:center; justify-content:space-between; gap:24px;
 }
 
-/* --- Search bar elegant, separat de nav --- */
 .search-wrap{
   width:min(1100px,92%);
   margin: 14px auto 0;
@@ -799,7 +701,6 @@ h2 {
 .search-label{
   display:block;
   font-weight:700;
-  /* Use generic accent variable */
   color: var(--color-rose-700);
   margin-bottom:6px;
 }
@@ -807,24 +708,20 @@ h2 {
 #search{
   width:100%;
   padding:12px 14px;
-  /* Use generic theme variables */
   border:1.5px solid var(--color-border-primary);
   border-radius:14px;
   outline:none;
   background: var(--color-bg-primary);
 }
 #search:focus{
-  /* Use generic pink/shadow variable */
   border-color:var(--color-pink-600);
   box-shadow:0 0 0 6px rgba(255,110,174,.15);
 }
 
-/* Dropdown rezultate */
 .search-results{
   position:absolute;
   top: calc(100% + 6px);
   left:0; right:0;
-  /* Use generic theme variables */
   background: var(--color-bg-primary);
   border:1px solid var(--color-border-primary);
   border-radius:14px;
@@ -842,14 +739,11 @@ h2 {
   display:block;
   padding:10px 12px;
   border-radius:10px;
-  /* Use generic text variable */
   color: var(--color-text-primary);
   text-decoration:none;
 }
 .search-results a:hover{
-  /* Use generic secondary background variable */
   background: var(--color-pink-100);
 }
 
-/* Sursa (catalogul) nu trebuie să fie vizibilă */
 #items{ display:none !important; }

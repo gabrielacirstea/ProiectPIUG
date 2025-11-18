@@ -11,7 +11,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
   
-  <!-- 🟢 Theme Toggle Button Styles + Scroll Button Styles -->
   <style>
         .nav-action {
             all: unset;
@@ -33,7 +32,6 @@
         .nav-action:hover { transform: translateY(-1px); }
         .nav-action svg { width: 22px; height: 22px; color: inherit; }
 
-        /* Theme toggle */
         .theme-toggle{
             all: unset;
             display: grid; 
@@ -50,13 +48,11 @@
         .theme-toggle:hover { transform: translateY(-1px); }
         .theme-toggle svg { width: 22px; height: 22px; color: var(--color-rose-700, #a2476a); }
 
-        /* Icon Toggling Logic */
         html[data-theme='light'] #iconMoon { display: none; }
         html[data-theme='light'] #iconSun { display: block; }
         html[data-theme='dark'] #iconMoon { display: block; }
         html[data-theme='dark'] #iconSun { display: none; }
 
-        /* 🟢 Scroll Up/Down Button */
         #scrollButton {
             position: fixed;
             bottom: 20px;
@@ -81,7 +77,6 @@
         #scrollButton:hover { transform: scale(1.05); background: var(--color-pink-500, #ff9ecb); }
         #scrollButton svg { width: 24px; height: 24px; }
 
-        /* Respect reduced motion */
         @media (prefers-reduced-motion: reduce) {
             #scrollButton { transition: none; }
             html { scroll-behavior: auto; }
@@ -116,14 +111,11 @@
       </nav>
       <a href="contact.html" class="nav-action help-button" aria-label="Go to Contact for Help">Help</a>
 
-      <!-- Theme Toggle Button -->
       <button id="themeToggle" class="theme-toggle" aria-label="Toggle light/dark theme">
-        <!-- Sun Icon (Light Mode) -->
         <svg id="iconSun" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="currentColor"
             d="M12 4a1 1 0 0 1 1-1h0a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V4zm0 16a1 1 0 0 1 1 1h0a1 1 0 0 1-1 1 1 1 0 0 1-1-1v-1a1 1 0 1 1 2 0v1zM4 13a1 1 0 1 1 0-2H5a1 1 0 1 1 0 2H4zm15 0a1 1 0 1 1 0-2h1a1 1 0 1 1 0 2h-1zM5.6 6.0a1 1 0 0 1 1.4-1.4l.7.7A1 1 0 1 1 6.3 6.7l-.7-.7zm11.3 11.3a1 1 0 0 1 1.4 1.4l-.7.7a1 1 0 0 1-1.4-1.4l.7-.7zM6.3 17.3a1 1 0 0 1-1.4 1.4l-.7-.7a1 1 0 1 1 1.4-1.4l.7.7zm12.1-11.7a1 1 0 0 1 1.4 1.4l-.7.7a1 1 0 1 1-1.4-1.4l.7-.7zM12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8z" />
         </svg>
-        <!-- Moon Icon (Dark Mode) -->
         <svg id="iconMoon" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="currentColor"
             d="M10.85 3.3a.75.75 0 0 0-.71.55c-.24 1.25-.36 2.5-.32 3.75s.18 2.5.49 3.74c.3 1.25.75 2.45 1.34 3.61.6 1.15 1.33 2.22 2.19 3.19a.75.75 0 0 0 1.26-.6c.22-1.25.33-2.5.28-3.75-.06-1.25-.26-2.5-.58-3.74-.31-1.25-.76-2.45-1.34-3.61-.6-1.15-1.33-2.22-2.18-3.19a.75.75 0 0 0-.55-.37zM12 2a10 10 0 1 0 10 10c0-5.52-4.48-10-10-10z" />
@@ -140,12 +132,10 @@
     <div class="search-box">
       <label for="search" class="search-label">Search</label>
       <input id="search" type="search" placeholder="Search" autocomplete="off">
-      <!-- dropdown cu rezultate -->
       <ul id="search-results" class="search-results" hidden></ul>
     </div>
   </section>
 
-  <!-- sursa de căutat -->
   <ul id="items" hidden>
     <li class="item" data-url="events.html#birthday" data-keywords="birthday sweet table">Birthday Sweet Table</li>
     <li class="item" data-url="events.html#wedding" data-keywords="wedding candy bar">Wedding Candy Bar</li>
@@ -292,7 +282,6 @@
     <h4>© 2025 SugarBloom. All rights reserved.</h4>
   </footer>
 
-  <!-- Nav drawer -->
   <script>
     const btn = document.querySelector('.menu-toggle');
     const drawer = document.getElementById('navLinks');
@@ -310,9 +299,7 @@
     }
   </script>
   
-  <!-- Search -->
   <script>
-    // Preia “baza de date” din #items
     const DB = [...document.querySelectorAll('#items .item')].map(li => ({
       title: li.textContent.trim(),
       url: li.dataset.url || '#',
@@ -322,7 +309,6 @@
     const input = document.getElementById('search');
     const list = document.getElementById('search-results');
 
-    // Debounce simplu
     let t;
     function debounce(fn, ms = 200) { clearTimeout(t); t = setTimeout(fn, ms); }
 
@@ -338,10 +324,8 @@
       const q = input.value.trim().toLowerCase();
       if (q.length < 2) { list.hidden = true; list.innerHTML = ''; return; }
 
-      // filtrează
       const results = DB.filter(x => x.hay.includes(q)).slice(0, 10);
 
-      // randează dropdown
       list.innerHTML = results.length
         ? results.map(x => `<li><a href="${x.url}">${highlight(x.title, q)}</a></li>`).join('')
         : `<li><a href="javascript:void(0)" tabindex="-1" style="pointer-events:none;color:#8a6273">No results</a></li>`;
@@ -355,9 +339,7 @@
     }
   </script>
 
-  <!-- Theme Toggling Logic -->
   <script>
-    // Helper function to update the ARIA label and icon visibility
     function updateThemeUI(theme) {
       const toggle = document.getElementById('themeToggle');
       if (toggle) {
@@ -366,7 +348,6 @@
       }
     }
 
-    // 1) Initialization: Set theme from localStorage or system preference
     const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     const savedTheme = localStorage.getItem('sb-theme');
     let initialTheme;
@@ -380,7 +361,6 @@
     document.documentElement.dataset.theme = initialTheme;
     updateThemeUI(initialTheme);
 
-    // 2) Toggle + persist
     const toggle = document.getElementById('themeToggle');
     if (toggle) {
       toggle.addEventListener('click', () => {
@@ -392,7 +372,6 @@
       });
     }
 
-    // 3) Listen to system preference changes if no manual preference is saved
     if (!savedTheme && window.matchMedia) {
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
         document.documentElement.dataset.theme = e.matches ? 'dark' : 'light';
@@ -401,22 +380,19 @@
     }
   </script>
 
-  <!-- 🟢 Fixed Scroll Button -->
   <button id="scrollButton" aria-label="Scroll to Top">
     <svg id="scrollIcon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <!-- Arrow path; rotated via JS -->
       <path d="M12 4l-8 8h6v8h4v-8h6z" transform="rotate(180 12 12)"/>
     </svg>
   </button>
 
-  <!-- 🟢 Scroll Up/Down Button Logic -->
   <script>
     (function () {
       const scrollButton = document.getElementById('scrollButton');
       if (!scrollButton) return;
 
       const iconPath = scrollButton.querySelector('path');
-      const topThreshold = 50; // when to show the button
+      const topThreshold = 50;
       let isAtBottom = false;
 
       function checkScrollPosition() {
@@ -424,20 +400,15 @@
         const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
         const contentHeight = document.documentElement.scrollHeight;
 
-        // Show/hide button
         const showButton = scrollY > topThreshold;
         scrollButton.classList.toggle('visible', showButton);
 
-        // Are we near the bottom?
         isAtBottom = (scrollY + viewportHeight) >= (contentHeight - topThreshold);
 
-        // Toggle icon direction + aria-label
         if (isAtBottom) {
-          // Show "up" arrow
           iconPath.setAttribute('transform', 'rotate(0 12 12)');
           scrollButton.setAttribute('aria-label', 'Scroll to Top');
         } else {
-          // Show "down" arrow
           iconPath.setAttribute('transform', 'rotate(180 12 12)');
           scrollButton.setAttribute('aria-label', 'Scroll to Bottom');
         }
@@ -454,7 +425,6 @@
       window.addEventListener('scroll', checkScrollPosition, { passive: true });
       scrollButton.addEventListener('click', handleScrollButtonClick);
 
-      // Initialize on load
       window.addEventListener('load', checkScrollPosition);
     })();
   </script>

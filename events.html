@@ -7,9 +7,7 @@
     <title>SugarBloom — Events & Catering</title>
     <link rel="stylesheet" href="style.css">
 
-    <!-- 🟢 NEW: Theme Toggle and Scroll Button Styles -->
     <style>
-        /* 🟢 NEW: Common Nav Action Styles (for both Help and Toggle buttons) */
         .nav-action {
             all: unset;
             display: flex;
@@ -20,7 +18,6 @@
             cursor: pointer;
             z-index: 1001;
 
-            /* Styling based on theme variables (assuming colors are defined in style.css) */
             background: var(--color-pink-200, #ffe6f0);
             box-shadow: var(--color-shadow, 0 8px 18px rgba(255, 110, 174, .25));
             color: var(--color-rose-700, #a2476a);
@@ -33,7 +30,6 @@
             transform: translateY(-1px);
         }
 
-        /* Specific styling for the circular buttons */
         .theme-toggle,
         .help-button {
             width: 42px;
@@ -48,7 +44,6 @@
             color: inherit;
         }
 
-        /* Icon Toggling Logic */
         html[data-theme='light'] #iconMoon {
             display: none;
         }
@@ -65,7 +60,6 @@
             display: none;
         }
 
-        /* 🟢 FIXED: About Us Carousel Styles */
         .about-carousel-wrapper {
             flex: 1;
             position: relative;
@@ -73,17 +67,13 @@
             width: 50%;
             max-width: 500px;
             border-radius: 18px;
-            /* Using a fixed height or a max-height ensures the slides line up horizontally */
-            /* We will ensure the wrapper takes the space it needs */
             min-height: 400px;
             max-height: 550px;
 
-            /* Using theme variables */
             border: 6px solid var(--color-bg-primary, var(--white));
             box-shadow: var(--color-shadow, 0 10px 30px rgba(255, 156, 194, .25));
         }
 
-        /* The track must be absolute to fill the wrapper height */
         .about-carousel-track {
             display: flex;
             position: absolute;
@@ -96,13 +86,10 @@
 
         .about-carousel-slide {
             width: calc(100% / 3);
-            /* Each slide takes 1/3 of the track width */
             flex-shrink: 0;
             height: 100%;
-            /* Fill the constrained height of the track */
             display: block;
             object-fit: cover;
-            /* Ensures images fill the space */
         }
 
         .about-carousel-nav {
@@ -131,7 +118,6 @@
             border: 1px solid var(--color-pink-600, #ff6fae);
         }
 
-        /* Mobile adjustment for the carousel wrapper */
         @media (max-width: 1000px) {
             .about-carousel-wrapper {
                 width: 100%;
@@ -139,7 +125,6 @@
             }
         }
         
-        /* 🟢 NEW: Scroll Button Styles (Copied from products.html) */
         #scrollButton {
             position: fixed;
             bottom: 20px;
@@ -152,14 +137,12 @@
             border-radius: 50%;
             cursor: pointer;
             z-index: 999;
-            /* Inherit styling from nav-action but make it stand out slightly */
             background: var(--color-pink-600, #ff6fae);
             color: var(--color-white, #ffffff);
             border: none;
             box-shadow: 0 4px 15px rgba(255, 110, 174, 0.4);
             transition: opacity 0.3s, transform 0.3s, background 0.3s;
             opacity: 0;
-            /* Hidden by default */
             visibility: hidden;
         }
 
@@ -208,15 +191,11 @@
             </nav>
             <a href="contact.html" class="nav-action help-button" aria-label="Go to Contact for Help">Help</a>
 
-
-            <!-- 🟢 UPDATED: Theme Toggle Button with both SVGs -->
             <button id="themeToggle" class="nav-action theme-toggle" aria-label="Toggle light/dark theme">
-                <!-- Sun Icon (Light Mode) -->
                 <svg id="iconSun" viewBox="0 0 24 24" aria-hidden="true">
                     <path fill="currentColor"
                         d="M12 4a1 1 0 0 1 1-1h0a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V4zm0 16a1 1 0 0 1 1 1h0a1 1 0 0 1-1 1 1 1 0 0 1-1-1v-1a1 1 0 1 1 2 0v1zM4 13a1 1 0 1 1 0-2H5a1 1 0 1 1 0 2H4zm15 0a1 1 0 1 1 0-2h1a1 1 0 1 1 0 2h-1zM5.6 6.0a1 1 0 0 1 1.4-1.4l.7.7A1 1 0 1 1 6.3 6.7l-.7-.7zm11.3 11.3a1 1 0 0 1 1.4 1.4l-.7.7a1 1 0 0 1-1.4-1.4l.7-.7zM6.3 17.3a1 1 0 0 1-1.4 1.4l-.7-.7a1 1 0 1 1 1.4-1.4l.7.7zm12.1-11.7a1 1 0 0 1 1.4 1.4l-.7.7a1 1 0 1 1-1.4-1.4l.7-.7zM12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8z" />
                 </svg>
-                <!-- Moon Icon (Dark Mode) -->
                 <svg id="iconMoon" viewBox="0 0 24 24" aria-hidden="true">
                     <path fill="currentColor"
                         d="M10.85 3.3a.75.75 0 0 0-.71.55c-.24 1.25-.36 2.5-.32 3.75s.18 2.5.49 3.74c.3 1.25.75 2.45 1.34 3.61.6 1.15 1.33 2.22 2.19 3.19a.75.75 0 0 0 1.26-.6c.22-1.25.33-2.5.28-3.75-.06-1.25-.26-2.5-.58-3.74-.31-1.25-.76-2.45-1.34-3.61-.6-1.15-1.33-2.22-2.18-3.19a.75.75 0 0 0-.55-.37zM12 2a10 10 0 1 0 10 10c0-5.52-4.48-10-10-10z" />
@@ -231,12 +210,10 @@
         <div class="search-box">
             <label for="search" class="search-label">Search</label>
             <input id="search" type="search" placeholder="Search" autocomplete="off">
-            <!-- dropdown cu rezultate -->
             <ul id="search-results" class="search-results" hidden></ul>
         </div>
     </section>
 
-    <!-- sursa de căutat: poți folosi lista existentă sau generată din pagină -->
     <ul id="items" hidden>
         <li class="item" data-url="events.html#birthday" data-keywords="birthday sweet table">Birthday Sweet Table</li>
         <li class="item" data-url="events.html#wedding" data-keywords="wedding candy bar">Wedding Candy Bar</li>
@@ -261,7 +238,6 @@
         </p>
 
         <div class="offers">
-            <!-- Offer 1 -->
             <div class="offer-card">
                 <h2>🎉 Birthday Sweet Table</h2>
                 <p class="price">from €180</p>
@@ -274,7 +250,6 @@
                 <a href="contact.html" class="button">Book Now</a>
             </div>
 
-            <!-- Offer 2 -->
             <div class="offer-card">
                 <h2>💍 Wedding Candy Bar</h2>
                 <p class="price">from €450</p>
@@ -288,7 +263,6 @@
                 <a href="contact.html" class="button">Book Now</a>
             </div>
 
-            <!-- Offer 3 -->
             <div class="offer-card">
                 <h2>🍪 Office Treat Box</h2>
                 <p class="price">from €95</p>
@@ -307,16 +281,13 @@
         <h4>© 2025 SugarBloom. All rights reserved.</h4>
     </footer>
     
-    <!-- 🟢 NEW: Fixed Scroll Button (Always at the bottom of the body) -->
     <button id="scrollButton" aria-label="Scroll to Top">
         <svg id="scrollIcon" viewBox="0 0 24 24" fill="currentColor">
-            <!-- Default Up Arrow -->
             <path d="M12 4l-8 8h6v8h4v-8h6z" transform="rotate(180 12 12)"/>
         </svg>
     </button>
 
     <script>
-        // Helper function to update the ARIA label and icon visibility
         function updateThemeUI(theme) {
             const toggle = document.getElementById('themeToggle');
             if (toggle) {
@@ -325,7 +296,6 @@
             }
         }
 
-        // 🟢 NEW: Scroll Up/Down Button Logic
         const scrollButton = document.getElementById('scrollButton');
         const scrollIconPath = scrollButton.querySelector('path');
         const topThreshold = 50;
@@ -336,20 +306,15 @@
             const viewportHeight = window.innerHeight;
             const contentHeight = document.documentElement.scrollHeight;
 
-            // Show button only if scrolled down past threshold
             const showButton = scrollY > topThreshold;
             scrollButton.classList.toggle('visible', showButton);
 
-            // Determine if the user is near the bottom
             isAtBottom = (scrollY + viewportHeight) >= (contentHeight - topThreshold);
 
-            // Toggle icon and aria-label
             if (isAtBottom) {
-                // Change icon to UP arrow (0 degree rotation)
                 scrollIconPath.setAttribute('transform', 'rotate(0 12 12)');
                 scrollButton.setAttribute('aria-label', 'Scroll to Top');
             } else {
-                // Change icon to DOWN arrow (180 degree rotation)
                 scrollIconPath.setAttribute('transform', 'rotate(180 12 12)');
                 scrollButton.setAttribute('aria-label', 'Scroll to Bottom');
             }
@@ -363,11 +328,9 @@
             }
         }
 
-        // Attach scroll event listeners
         window.addEventListener('scroll', checkScrollPosition);
         scrollButton.addEventListener('click', handleScrollButtonClick);
         window.addEventListener('load', checkScrollPosition);
-        // ------------------------------------------------------------------
 
         const btn = document.querySelector('.menu-toggle');
         const drawer = document.getElementById('navLinks');
@@ -386,7 +349,6 @@
     </script>
 
     <script>
-        // Preia “baza de date” din #items
         const DB = [...document.querySelectorAll('#items .item')].map(li => ({
             title: li.textContent.trim(),
             url: li.dataset.url || '#',
@@ -396,7 +358,6 @@
         const input = document.getElementById('search');
         const list = document.getElementById('search-results');
 
-        // Debounce simplu
         let t;
         function debounce(fn, ms = 200) { clearTimeout(t); t = setTimeout(fn, ms); }
 
@@ -412,10 +373,8 @@
             const q = input.value.trim().toLowerCase();
             if (q.length < 2) { list.hidden = true; list.innerHTML = ''; return; }
 
-            // filtrează
             const results = DB.filter(x => x.hay.includes(q)).slice(0, 10);
 
-            // randează dropdown
             list.innerHTML = results.length
                 ? results.map(x => `<li><a href="${x.url}">${highlight(x.title, q)}</a></li>`).join('')
                 : `<li><a href="javascript:void(0)" tabindex="-1" style="pointer-events:none;color:#8a6273">No results</a></li>`;
@@ -429,10 +388,7 @@
         }
     </script>
 
-    <!-- 🟢 NEW: Theme Toggling Logic -->
     <script>
-        // This is a duplicate of the updateThemeUI function above, ensuring it runs.
-        // It's separated for clarity but could be merged.
         function updateThemeUI(theme) {
             const toggle = document.getElementById('themeToggle');
             if (toggle) {
@@ -441,7 +397,6 @@
             }
         }
         
-        // 1) Initialization: Set theme from localStorage or system preference
         const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         const savedTheme = localStorage.getItem('sb-theme');
         let initialTheme;
@@ -455,7 +410,6 @@
         document.documentElement.dataset.theme = initialTheme;
         updateThemeUI(initialTheme);
 
-        // 2) Toggle + persist
         const toggle = document.getElementById('themeToggle');
         if (toggle) {
             toggle.addEventListener('click', () => {
@@ -467,7 +421,6 @@
             });
         }
 
-        // 3) Listen to system preference changes if no manual preference is saved
         if (!savedTheme && window.matchMedia) {
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
                 document.documentElement.dataset.theme = e.matches ? 'dark' : 'light';

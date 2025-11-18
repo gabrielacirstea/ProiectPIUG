@@ -12,7 +12,6 @@ if ($name === '' || $email === '' || $message === '' || !filter_var($email, FILT
   header('Location: contact.html?sent=0&err=invalid'); exit;
 }
 
-// prevent header injection
 if (preg_match('/[\r\n]/', $email) || preg_match('/[\r\n]/', $subject)) {
   header('Location: contact.html?sent=0&err=inject'); exit;
 }
