@@ -29,30 +29,63 @@
             margin-left: 10px;
             transition: background .25s ease, box-shadow .25s ease, transform .15s ease;
         }
-        .help-button { width: 42px; height: 42px; padding: 0; }
-        .nav-action:hover { transform: translateY(-1px); }
-        .nav-action svg { width: 22px; height: 22px; color: inherit; }
 
-        .theme-toggle{
+        .help-button {
+            width: 42px;
+            height: 42px;
+            padding: 0;
+        }
+
+        .nav-action:hover {
+            transform: translateY(-1px);
+        }
+
+        .nav-action svg {
+            width: 22px;
+            height: 22px;
+            color: inherit;
+        }
+
+        .theme-toggle {
             all: unset;
-            display: grid; 
+            display: grid;
             place-items: center;
-            width: 42px; height: 42px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             cursor: pointer;
             z-index: 1001;
-            background: var(--color-pink-200, #ffe6f0); 
-            box-shadow: var(--color-shadow, 0 8px 18px rgba(255,110,174,.25));
+            background: var(--color-pink-200, #ffe6f0);
+            box-shadow: var(--color-shadow, 0 8px 18px rgba(255, 110, 174, .25));
             transition: background .25s ease, box-shadow .25s ease, transform .15s ease;
             margin-left: 10px;
         }
-        .theme-toggle:hover { transform: translateY(-1px); }
-        .theme-toggle svg { width: 22px; height: 22px; color: var(--color-rose-700, #a2476a); }
 
-        html[data-theme='light'] #iconMoon { display: none; }
-        html[data-theme='light'] #iconSun { display: block; }
-        html[data-theme='dark'] #iconMoon { display: block; }
-        html[data-theme='dark'] #iconSun { display: none; }
+        .theme-toggle:hover {
+            transform: translateY(-1px);
+        }
+
+        .theme-toggle svg {
+            width: 22px;
+            height: 22px;
+            color: var(--color-rose-700, #a2476a);
+        }
+
+        html[data-theme='light'] #iconMoon {
+            display: none;
+        }
+
+        html[data-theme='light'] #iconSun {
+            display: block;
+        }
+
+        html[data-theme='dark'] #iconMoon {
+            display: block;
+        }
+
+        html[data-theme='dark'] #iconSun {
+            display: none;
+        }
 
         #scrollButton {
             position: fixed;
@@ -74,13 +107,30 @@
             opacity: 0;
             visibility: hidden;
         }
-        #scrollButton.visible { opacity: 1; visibility: visible; }
-        #scrollButton:hover { transform: scale(1.05); background: var(--color-pink-500, #ff9ecb); }
-        #scrollButton svg { width: 24px; height: 24px; }
+
+        #scrollButton.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #scrollButton:hover {
+            transform: scale(1.05);
+            background: var(--color-pink-500, #ff9ecb);
+        }
+
+        #scrollButton svg {
+            width: 24px;
+            height: 24px;
+        }
 
         @media (prefers-reduced-motion: reduce) {
-            #scrollButton { transition: none; }
-            html { scroll-behavior: auto; }
+            #scrollButton {
+                transition: none;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
         }
 
         .notification {
@@ -97,6 +147,7 @@
             transition: opacity 0.5s ease-in-out;
             z-index: 1200;
         }
+
         .notification.visible {
             opacity: 1;
         }
@@ -217,7 +268,7 @@
     <footer class="footer">
         <h4>© 2025 SugarBloom. All rights reserved.</h4>
     </footer>
-    
+
     <script>
         function validateForm() {
             var nameInput = document.getElementById('name');
@@ -253,7 +304,7 @@
 
             return true;
         }
-        
+
         const btn = document.querySelector('.menu-toggle');
         const drawer = document.getElementById('navLinks');
         if (btn && drawer) {
@@ -282,13 +333,13 @@
         const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         const savedTheme = localStorage.getItem('sb-theme');
         let initialTheme;
-        
+
         if (savedTheme) {
             initialTheme = savedTheme;
         } else {
             initialTheme = prefersDark ? 'dark' : 'light';
         }
-        
+
         document.documentElement.dataset.theme = initialTheme;
         updateThemeUI(initialTheme);
 
@@ -313,7 +364,7 @@
 
     <button id="scrollButton" aria-label="Scroll to Top">
         <svg id="scrollIcon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 4l-8 8h6v8h4v-8h6z" transform="rotate(180 12 12)"/>
+            <path d="M12 4l-8 8h6v8h4v-8h6z" transform="rotate(180 12 12)" />
         </svg>
     </button>
 

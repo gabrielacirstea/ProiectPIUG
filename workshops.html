@@ -6,82 +6,131 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SugarBloom — Workshops & Classes</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- Font dependencies if not already in style.css -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
-  
+
   <style>
-        .nav-action {
-            all: unset;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-weight: 600;
-            cursor: pointer;
-            z-index: 1001;
-            background: var(--color-pink-200, #ffe6f0);
-            box-shadow: var(--color-shadow, 0 8px 18px rgba(255, 110, 174, .25));
-            color: var(--color-rose-700, #a2476a);
-            border-radius: 999px;
-            margin-left: 10px;
-            transition: background .25s ease, box-shadow .25s ease, transform .15s ease;
-        }
-        .help-button { width: 42px; height: 42px; padding: 0; }
-        .nav-action:hover { transform: translateY(-1px); }
-        .nav-action svg { width: 22px; height: 22px; color: inherit; }
+    .nav-action {
+      all: unset;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      z-index: 1001;
+      background: var(--color-pink-200, #ffe6f0);
+      box-shadow: var(--color-shadow, 0 8px 18px rgba(255, 110, 174, .25));
+      color: var(--color-rose-700, #a2476a);
+      border-radius: 999px;
+      margin-left: 10px;
+      transition: background .25s ease, box-shadow .25s ease, transform .15s ease;
+    }
 
-        .theme-toggle{
-            all: unset;
-            display: grid; 
-            place-items: center;
-            width: 42px; height: 42px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 1001;
-            background: var(--color-pink-200, #ffe6f0); 
-            box-shadow: var(--color-shadow, 0 8px 18px rgba(255,110,174,.25));
-            transition: background .25s ease, box-shadow .25s ease, transform .15s ease;
-            margin-left: 10px;
-        }
-        .theme-toggle:hover { transform: translateY(-1px); }
-        .theme-toggle svg { width: 22px; height: 22px; color: var(--color-rose-700, #a2476a); }
+    .help-button {
+      width: 42px;
+      height: 42px;
+      padding: 0;
+    }
 
-        html[data-theme='light'] #iconMoon { display: none; }
-        html[data-theme='light'] #iconSun { display: block; }
-        html[data-theme='dark'] #iconMoon { display: block; }
-        html[data-theme='dark'] #iconSun { display: none; }
+    .nav-action:hover {
+      transform: translateY(-1px);
+    }
 
-        #scrollButton {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 999;
-            background: var(--color-pink-600, #ff6fae);
-            color: var(--color-white, #ffffff);
-            border: none;
-            box-shadow: 0 4px 15px rgba(255, 110, 174, 0.4);
-            transition: opacity 0.3s, transform 0.3s, background 0.3s;
-            opacity: 0;
-            visibility: hidden;
-        }
-        #scrollButton.visible { opacity: 1; visibility: visible; }
-        #scrollButton:hover { transform: scale(1.05); background: var(--color-pink-500, #ff9ecb); }
-        #scrollButton svg { width: 24px; height: 24px; }
+    .nav-action svg {
+      width: 22px;
+      height: 22px;
+      color: inherit;
+    }
 
-        @media (prefers-reduced-motion: reduce) {
-            #scrollButton { transition: none; }
-            html { scroll-behavior: auto; }
-        }
-    </style>
+    .theme-toggle {
+      all: unset;
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1001;
+      background: var(--color-pink-200, #ffe6f0);
+      box-shadow: var(--color-shadow, 0 8px 18px rgba(255, 110, 174, .25));
+      transition: background .25s ease, box-shadow .25s ease, transform .15s ease;
+      margin-left: 10px;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-1px);
+    }
+
+    .theme-toggle svg {
+      width: 22px;
+      height: 22px;
+      color: var(--color-rose-700, #a2476a);
+    }
+
+    html[data-theme='light'] #iconMoon {
+      display: none;
+    }
+
+    html[data-theme='light'] #iconSun {
+      display: block;
+    }
+
+    html[data-theme='dark'] #iconMoon {
+      display: block;
+    }
+
+    html[data-theme='dark'] #iconSun {
+      display: none;
+    }
+
+    #scrollButton {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 999;
+      background: var(--color-pink-600, #ff6fae);
+      color: var(--color-white, #ffffff);
+      border: none;
+      box-shadow: 0 4px 15px rgba(255, 110, 174, 0.4);
+      transition: opacity 0.3s, transform 0.3s, background 0.3s;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    #scrollButton.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #scrollButton:hover {
+      transform: scale(1.05);
+      background: var(--color-pink-500, #ff9ecb);
+    }
+
+    #scrollButton svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #scrollButton {
+        transition: none;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -145,7 +194,8 @@
     <li class="item" data-url="products.html#occasioncake" data-keywords="occasion cake">Occasion Cake</li>
     <li class="item" data-url="products.html#sweetreats" data-keywords="sweet treats">Sweet Treats</li>
 
-    <li class="item" data-url="workshops.html#cupcake" data-keywords="cupcake vanilie glazura">Cupcake Decorating 101</li>
+    <li class="item" data-url="workshops.html#cupcake" data-keywords="cupcake vanilie glazura">Cupcake Decorating 101
+    </li>
     <li class="item" data-url="workshops.html#flowers" data-keywords="flori buttercream">Buttercream Flowers</li>
     <li class="item" data-url="workshops.html#cookie" data-keywords="cookie art royal icing">Whimsical Cookie Art</li>
   </ul>
@@ -273,7 +323,8 @@
       </details>
       <details>
         <summary>Allergies & dietary notes?</summary>
-        <p>Please mention them in the form — we can often accommodate (e.g., no nuts). Some classes may contain gluten/dairy.</p>
+        <p>Please mention them in the form — we can often accommodate (e.g., no nuts). Some classes may contain
+          gluten/dairy.</p>
       </details>
     </div>
   </section>
@@ -298,7 +349,7 @@
       });
     }
   </script>
-  
+
   <script>
     const DB = [...document.querySelectorAll('#items .item')].map(li => ({
       title: li.textContent.trim(),
@@ -382,7 +433,7 @@
 
   <button id="scrollButton" aria-label="Scroll to Top">
     <svg id="scrollIcon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 4l-8 8h6v8h4v-8h6z" transform="rotate(180 12 12)"/>
+      <path d="M12 4l-8 8h6v8h4v-8h6z" transform="rotate(180 12 12)" />
     </svg>
   </button>
 
@@ -430,4 +481,5 @@
   </script>
 
 </body>
+
 </html>

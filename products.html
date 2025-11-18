@@ -45,7 +45,7 @@
             height: 22px;
             color: var(--color-rose-700, #a2476a);
         }
-        
+
         .nav-action {
             all: unset;
             display: flex;
@@ -62,16 +62,17 @@
             margin-left: 10px;
             transition: background .25s ease, box-shadow .25s ease, transform .15s ease;
         }
+
         .help-button {
             width: 42px;
             height: 42px;
             padding: 0;
         }
-        
+
         .nav-action:hover {
             transform: translateY(-1px);
         }
-        
+
         .nav-action svg {
             width: 22px;
             height: 22px;
@@ -100,13 +101,13 @@
             margin-top: 25px;
             border-collapse: collapse;
             font-size: 14px;
-            background: var(--color-bg-secondary, #fff2f7); 
+            background: var(--color-bg-secondary, #fff2f7);
             border: 1px solid var(--color-border-primary, #ffd6e8);
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(255, 156, 194, .1);
         }
-        
+
         .options-table caption {
             font-weight: 700;
             font-size: 18px;
@@ -116,10 +117,11 @@
             padding: 8px 0;
         }
 
-        .options-table th, .options-table td {
+        .options-table th,
+        .options-table td {
             padding: 10px 15px;
             text-align: left;
-            color: var(--color-text-primary, #4b2e3b); 
+            color: var(--color-text-primary, #4b2e3b);
         }
 
         .options-table th {
@@ -132,11 +134,11 @@
         .options-table tr:nth-child(even) {
             background: var(--color-pink-100, #fff2f7);
         }
-        
+
         .options-table tr:hover {
             background: var(--color-pink-200, #ffe6f0);
         }
-        
+
         #scrollButton {
             position: fixed;
             bottom: 20px;
@@ -149,7 +151,7 @@
             border-radius: 50%;
             cursor: pointer;
             z-index: 999;
-            background: var(--color-pink-600, #ff6fae); 
+            background: var(--color-pink-600, #ff6fae);
             color: var(--color-white, #ffffff);
             border: none;
             box-shadow: 0 4px 15px rgba(255, 110, 174, 0.4);
@@ -162,7 +164,7 @@
             opacity: 1;
             visibility: visible;
         }
-        
+
         #scrollButton:hover {
             transform: scale(1.05);
             background: var(--color-pink-500, #ff9ecb);
@@ -177,7 +179,7 @@
 </head>
 
 <body>
-   <header class="site-nav">
+    <header class="site-nav">
         <div class="nav-inner">
             <a href="index.html" class="brand">
                 <img src="img/logo-removebg.png" alt="SugarBloom logo" width="110" height="auto">
@@ -247,8 +249,11 @@
             <img src="img/weddingCake.jpg" style="width:500px; height: 600px;">
             <div class="proiectul">
                 <h2>Wedding cake</h2>
-                <p>At Sugarbloom, we believe your wedding cake should be as magical as your love story. Each tier is crafted with elegance, soft flavors, and delicate decorations — from sugar flowers that never wilt to silky frosting that melts in every smile. Whether you dream of something classic or whimsical, we'll make sure your cake is the centerpiece of your happily ever after.</p>
-                
+                <p>At Sugarbloom, we believe your wedding cake should be as magical as your love story. Each tier is
+                    crafted with elegance, soft flavors, and delicate decorations — from sugar flowers that never wilt
+                    to silky frosting that melts in every smile. Whether you dream of something classic or whimsical,
+                    we'll make sure your cake is the centerpiece of your happily ever after.</p>
+
                 <table class="options-table">
                     <caption>Customization Options</caption>
                     <thead>
@@ -279,8 +284,11 @@
             <img src="img/cake.jpg" style="width:500px; height: 600px;">
             <div class="proiectul">
                 <h2>Ocassion cake</h2>
-                <p>Every celebration deserves a show-stopper! From fun and colorful birthday cakes to elegant anniversary delights, Sugarbloom creates cakes that make memories sweeter. Playful sprinkles, creamy layers, or personalized designs — whatever your wish, we'll turn it into a cake that sparks joy and makes the occasion unforgettable.</p>
-                
+                <p>Every celebration deserves a show-stopper! From fun and colorful birthday cakes to elegant
+                    anniversary delights, Sugarbloom creates cakes that make memories sweeter. Playful sprinkles, creamy
+                    layers, or personalized designs — whatever your wish, we'll turn it into a cake that sparks joy and
+                    makes the occasion unforgettable.</p>
+
                 <table class="options-table">
                     <caption>Customization Options</caption>
                     <thead>
@@ -312,8 +320,11 @@
             <div class="proiectul">
 
                 <h2>Sweet treats</h2>
-                <p>Not every sweet moment needs a big occasion — sometimes it's about that cozy cookie with your coffee, a fluffy cupcake on a rainy day, or a little tart that feels like sunshine. Our sweet treats are baked fresh daily, with a sprinkle of love and a touch of whimsy, perfect for sharing… or keeping all to yourself.</p>
-                
+                <p>Not every sweet moment needs a big occasion — sometimes it's about that cozy cookie with your coffee,
+                    a fluffy cupcake on a rainy day, or a little tart that feels like sunshine. Our sweet treats are
+                    baked fresh daily, with a sprinkle of love and a touch of whimsy, perfect for sharing… or keeping
+                    all to yourself.</p>
+
                 <table class="options-table">
                     <caption>Available Varieties</caption>
                     <thead>
@@ -347,10 +358,10 @@
 
     <button id="scrollButton" aria-label="Scroll to Top">
         <svg id="scrollIcon" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 4l-8 8h6v8h4v-8h6z" transform="rotate(180 12 12)"/>
+            <path d="M12 4l-8 8h6v8h4v-8h6z" transform="rotate(180 12 12)" />
         </svg>
     </button>
-    
+
     <script>
         function updateThemeUI(theme) {
             const toggle = document.getElementById('themeToggle');
@@ -436,7 +447,7 @@
                 scrollButton.setAttribute('aria-label', 'Scroll to Bottom');
             }
         }
-        
+
         function handleScrollButtonClick() {
             if (isAtBottom) {
                 window.scrollTo({ top: 0, behavior: 'smooth' });

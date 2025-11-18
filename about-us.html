@@ -82,12 +82,12 @@
             width: 50%;
             max-width: 500px;
             border-radius: 18px;
-            height: 500px; 
+            height: 500px;
             min-height: 400px;
-            
+
             border: 6px solid var(--color-bg-primary, var(--white));
             box-shadow: var(--color-shadow, 0 10px 30px rgba(255, 156, 194, .25));
-            background-color: var(--color-pink-200, #ffe6f0); 
+            background-color: var(--color-pink-200, #ffe6f0);
         }
 
         .about-carousel-track {
@@ -106,7 +106,7 @@
             height: 100% !important;
             display: block !important;
             object-fit: cover !important;
-            
+
             border: none !important;
             border-radius: 0 !important;
             box-shadow: none !important;
@@ -147,11 +147,12 @@
                 height: 350px;
                 margin-top: 20px;
             }
+
             .row {
                 flex-direction: column;
             }
         }
-        
+
         #scrollButton {
             position: fixed;
             bottom: 20px;
@@ -268,27 +269,25 @@
                 <p>We invite you to explore our world of sweetness, where every bite is a celebration of life's little
                     joys. Whether you're here for a special occasion or just because, we promise to make your experience
                     at Sugarbloom unforgettable.</p>
-                
+
                 <button id="portfolioButton" class="button redb">Watch Our Portfolio Video</button>
+
                 <div id="videoContainer" style="margin-top: 20px; display: none;">
-                    <iframe id="portfolioVideo" 
-                            src="https://www.youtube.com/embed/tJ1GYjRU-O4?autoplay=0&rel=0&mute=1" 
-                            title="YouTube video player"
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            referrerpolicy="strict-origin-when-cross-origin" 
-                            allowfullscreen>
-                    </iframe>
+                    <video id="portfolioVideo" width="640" height="360" controls>
+                        <source src="video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
+
             </div>
 
-             <img src="img/bakery.jpg" alt="SugarBloom Interior">
+            <img src="img/bakery.jpg" alt="SugarBloom Interior">
         </div>
     </section>
 
-    <section class="specialisti">
+    <section class="TESTIMONIALE">
         <div class="carousel" aria-label="Testimonials">
-            <button id="prevButton" class="prev-button" aria-label="Previous">‹</button>
+            <button id="prevButton" class="prev-button" aria-label="Previous"></button>
 
             <div class="slide">
                 <h1>Iris K.</h1>
@@ -304,7 +303,7 @@
                 <p>“Walking into Sugarbloom feels like walking into a storybook... I can't wait to come back!”</p>
             </div>
 
-            <button id="nextButton" class="next-button" aria-label="Next">›</button>
+            <button id="nextButton" class="next-button" aria-label="Next"></button>
         </div>
     </section>
 
@@ -314,7 +313,7 @@
 
     <button id="scrollButton" aria-label="Scroll to Top">
         <svg id="scrollIcon" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 4l-8 8h6v8h4v-8h6z" transform="rotate(180 12 12)"/>
+            <path d="M12 4l-8 8h6v8h4v-8h6z" transform="rotate(180 12 12)" />
         </svg>
     </button>
 
@@ -433,32 +432,32 @@
             updateAboutCarousel(0);
             startAutoAdvance();
         }
-        
+
         const portfolioButton = document.getElementById('portfolioButton');
         const videoContainer = document.getElementById('videoContainer');
-        const videoIframe = document.getElementById('portfolioVideo');
+        const videoElement = document.getElementById('portfolioVideo'); // <video>, nu iframe
 
-        if (portfolioButton && videoContainer && videoIframe) {
+        if (portfolioButton && videoContainer && videoElement) {
             portfolioButton.addEventListener('click', () => {
-                const isVisible = videoContainer.style.display !== 'none';
-                videoContainer.style.display = isVisible ? 'none' : 'block';
-                
+                const isVisible = window.getComputedStyle(videoContainer).display !== 'none';
+
                 if (!isVisible) {
-                    let src = videoIframe.src;
-                    src = src.replace('autoplay=0', 'autoplay=1');
-                    if (!src.includes('mute=1')) {
-                        src += '&mute=1';
+                    videoContainer.style.display = 'block';
+                    try {
+                        videoElement.currentTime = 0;
+                        videoElement.play();
+                    } catch (e) {
+                        console.warn('Could not autoplay video:', e);
                     }
-                    videoIframe.src = src;
                     portfolioButton.textContent = "Hide Portfolio Video";
                 } else {
-                    let src = videoIframe.src;
-                    src = src.replace('autoplay=1', 'autoplay=0');
-                    videoIframe.src = src;
+                    videoElement.pause();
+                    videoContainer.style.display = 'none';
                     portfolioButton.textContent = "Watch Our Portfolio Video";
                 }
             });
         }
+
 
         const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         const savedTheme = localStorage.getItem('sb-theme');

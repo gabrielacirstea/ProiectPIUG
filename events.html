@@ -124,7 +124,7 @@
                 max-width: none;
             }
         }
-        
+
         #scrollButton {
             position: fixed;
             bottom: 20px;
@@ -223,10 +223,12 @@
         <li class="item" data-url="products.html#occasioncake" data-keywords="occasion cake">Occasion Cake</li>
         <li class="item" data-url="products.html#sweetreats" data-keywords="sweet treats">Sweet Treats</li>
 
-        <li class="item" data-url="workshops.html#cupcake" data-keywords="cupcake vanilie glazura">Cupcake Decorating 101
+        <li class="item" data-url="workshops.html#cupcake" data-keywords="cupcake vanilie glazura">Cupcake Decorating
+            101
         </li>
         <li class="item" data-url="workshops.html#flowers" data-keywords="flori buttercream">Buttercream Flowers</li>
-        <li class="item" data-url="workshops.html#cookie" data-keywords="cookie art royal icing">Whimsical Cookie Art</li>
+        <li class="item" data-url="workshops.html#cookie" data-keywords="cookie art royal icing">Whimsical Cookie Art
+        </li>
     </ul>
 
     <section class="events container">
@@ -280,10 +282,10 @@
     <footer class="footer">
         <h4>© 2025 SugarBloom. All rights reserved.</h4>
     </footer>
-    
+
     <button id="scrollButton" aria-label="Scroll to Top">
         <svg id="scrollIcon" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 4l-8 8h6v8h4v-8h6z" transform="rotate(180 12 12)"/>
+            <path d="M12 4l-8 8h6v8h4v-8h6z" transform="rotate(180 12 12)" />
         </svg>
     </button>
 
@@ -396,7 +398,7 @@
                 toggle.setAttribute('aria-label', `Toggle to ${targetTheme} theme`);
             }
         }
-        
+
         const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         const savedTheme = localStorage.getItem('sb-theme');
         let initialTheme;

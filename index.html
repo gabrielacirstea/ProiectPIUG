@@ -193,10 +193,10 @@
 
     <button id="scrollButton" aria-label="Scroll to Top">
         <svg id="scrollIcon" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 4l-8 8h6v8h4v-8h6z" transform="rotate(180 12 12)"/>
+            <path d="M12 4l-8 8h6v8h4v-8h6z" transform="rotate(180 12 12)" />
         </svg>
     </button>
-    
+
     <script>
         function updateThemeUI(theme) {
             const toggle = document.getElementById('themeToggle');
@@ -237,7 +237,7 @@
                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
             }
         }
-        
+
         window.addEventListener('scroll', checkScrollPosition);
         scrollButton.addEventListener('click', handleScrollButtonClick);
         window.addEventListener('load', checkScrollPosition);
@@ -256,7 +256,7 @@
                 }
             });
         }
-        
+
         const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         const savedTheme = localStorage.getItem('sb-theme');
         let initialTheme;
